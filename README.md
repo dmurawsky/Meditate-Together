@@ -5,6 +5,11 @@ Soil is an open source JavaScript framework built on top of Firebase to allow de
 
 We're soiling the internet!
 
+ToDo
+====
+* Add option to minify Module Code
+* Add ability to upload files
+
 Elements
 ====
 * Text
