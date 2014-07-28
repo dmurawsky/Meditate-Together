@@ -1,4 +1,4 @@
-soil
+Soil
 ====
 
 Soil is an open source JavaScript framework built on top of Firebase to allow developers to define elements that users can link together to create the web.
@@ -6,7 +6,7 @@ Soil is an open source JavaScript framework built on top of Firebase to allow de
 We're soiling the internet!
 
 ToDo
-====
+===
 * Simplify and add comments
 * Use AngularFire to create a UI
 * Add option to minify Module Code
@@ -14,7 +14,7 @@ ToDo
 * Add the ability to contact the creator of a module
 
 Elements
-====
+===
 * Text
 * Image
 * Video
