@@ -7,8 +7,11 @@ We're soiling the internet!
 
 ToDo
 ====
+* Simplify and add comments
+* Use AngularFire to create a UI
 * Add option to minify Module Code
 * Add ability to upload files
+* Add the ability to contact the creator of a module
 
 Elements
 ====
