@@ -12,6 +12,7 @@ ToDo
 * Add option to minify Module Code
 * Add ability to upload files
 * Add the ability to contact the creator of a module
+* Add the ability to select which MVCs and Frameworks you would like to use in your module
 
 Elements
 ===
