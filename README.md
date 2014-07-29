@@ -10,9 +10,10 @@ ToDo
 * Simplify and add comments
 * Use AngularFire to create a UI
 * Add option to minify Module Code
-* Add ability to upload files
+* Add ability to upload files to create modules
 * Add the ability to contact the creator of a module
 * Add the ability to select which MVCs and Frameworks you would like to use in your module
+* Rewrite the code to separate the current data from the display of the connected data to allow smooth animations between data changes
 
 Elements
 ===
