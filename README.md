@@ -14,7 +14,8 @@ ToDo
 * Add the ability to contact the creator of a module
 * Add the ability to select which MVCs and Frameworks you would like to use in your module
 * Rewrite the code to separate the current data from the display of the connected data to allow smooth animations between data changes
-* Create a wiki-like system for editing and updating modules
+* Create an upvote system for different versions of a module
+* Later, create a wiki-like system for editing and updating modules
 
 Elements
 ===
