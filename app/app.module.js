@@ -31,8 +31,10 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//angularFire sync object
 	var ref = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
 	var sync = $firebase(ref).$asObject();
-	sync["test"] = "testy";
-	sync.$bindTo($scope, "monad");
+	sync.$loaded(function(data) {
+		sync["test"] = "testy";
+		sync.$bindTo($scope, "monad");
+	});
 	//if this is the first time visiting this link add the title property to create the monad model
 	ref.once("value", function(snap){
 		var title = snap.hasChild('title');
