@@ -15,7 +15,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	return {
 		create: function(monad, newCon, newRel){
 			//create a connection by adding a connection and relationship and setting the value to true
-			var ref = new Firebase("https://soil.firebaseio.com/connections/"+monad);
+			var ref = new Firebase("https://soil.firebaseio.com/connections/");
 			var sanConnection = $filter('sanInput')(newCon);
 			var sanRelationship = $filter('sanInput')(newRel);
 			var connection = ref.push();
