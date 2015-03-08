@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-10">
 		<h1>{{monad.title}}</h1><hr>
 		<div class="row">
 			<div class="col-md-3" ng-repeat="(name, connection) in monad.connections" ng-cloak>
@@ -14,33 +14,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
-		<table style="text-align:center!important;">
-			<tr>
-				<th></th>
-				<th>Monad</th>
-				<th>Relationship</th>
-				<th>Connection</th>
-			</tr>
-			<tr>
-				<td><button ng-init="showFirst = true" ng-click="showFirst = !showFirst" ng-show="showFirst" type="submit" class="btn btn-danger btn-xs" ng-click="makeConnection()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><button ng-click="showFirst = !showFirst" ng-hide="showFirst" type="submit" class="btn btn-success btn-xs" ng-click="makeConnection()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></td>
-				<td ng-show="showFirst">{{monad.title}}</td>
-				<td ng-show="showFirst"><input type="text" class="form-control" ng-model="newConnection"></td>
-				<td ng-show="showFirst"><input type="text" class="form-control" ng-model="newRelationship"></td>
-			</tr>
-			<tr>
-				<td><button ng-init="showSecond = true" ng-click="showSecond = !showSecond" ng-show="showSecond" type="submit" class="btn btn-danger btn-xs" ng-click="makeConnection()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><button ng-click="showSecond = !showSecond" ng-hide="showSecond" type="submit" class="btn btn-success btn-xs" ng-click="makeConnection()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></td>
-				<td ng-show="showSecond"><input type="text" class="form-control" ng-model="newConnection"></td>
-				<td ng-show="showSecond">{{monad.title}}</td>
-				<td ng-show="showSecond"><input type="text" class="form-control" ng-model="newRelationship"></td>
-			</tr>
-			<tr>
-				<td><button ng-init="showThrid = true" ng-click="showThrid = !showThrid" ng-show="showThrid" type="submit" class="btn btn-danger btn-xs" ng-click="makeConnection()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button><button ng-click="showThrid = !showThrid" ng-hide="showThrid" type="submit" class="btn btn-success btn-xs" ng-click="makeConnection()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></td>
-				<td ng-show="showThrid"><input type="text" class="form-control" ng-model="newRelationship"></td>
-				<td ng-show="showThrid"><input type="text" class="form-control" ng-model="newConnection"></td>
-				<td ng-show="showThrid">{{monad.title}}</td>
-			</tr>
-		</table>
-		<button type="submit" class="btn btn-primary btn-block" ng-click="makeConnection()">+</button>
+	<div class="col-md-2">
+		<form>
+			<div style="text-align:center!important;">
+				<h3>{{monad.title}}</h3>
+				<input type="text" class="form-control" ng-model="newRelationship" placeholder="Relationship">
+				<input type="text" class="form-control" ng-model="newConnection" placeholder="Connection">
+			</div>
+			<button type="submit" class="btn btn-primary btn-block" ng-click="makeConnection(newConnection, newRelationship)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+		</form>
 	</div>
 </div>
