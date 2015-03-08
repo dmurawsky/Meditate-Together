@@ -19,7 +19,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var sanConnection = $filter('sanInput')(newCon);
 			var sanRelationship = $filter('sanInput')(newRel);
 			var connection = ref.push({mon:monad,con:newCon,rel:newRel});
-			var monRef = Firebase("https://soil.firebaseio.com/monads/");
+			var monRef = new Firebase("https://soil.firebaseio.com/monads/");
 			monRef.child(monad+"/"+connection.key()).set({access:"public"});
 			monRef.child(sanConnection+"/"+connection.key()).set({access:"public"});
 			monRef.child(sanRelationship+"/"+connection.key()).set({access:"public"});
