@@ -29,8 +29,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 })
 .controller("monadCtrl", ["Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
-	var ref = new Firebase("https://soil.firebaseio.com/"+$routeParams.monad);
+	var ref = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
 	var sync = $firebase(ref).$asObject();
+	sync["test"] = "testy";
 	sync.$bindTo($scope, "monad");
 	//if this is the first time visiting this link add the title property to create the monad model
 	ref.once("value", function(snap){
@@ -48,7 +49,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }])
 .controller("viewCtrl", ["Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
-	var monadRef = new Firebase("https://soil.firebaseio.com/"+$routeParams.monad);
+	var monadRef = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
 	var monadSync = $firebase(monadRef).$asObject();
 	monadSync.$bindTo($scope, "monad");
 	//if this is the first time visiting this link add the title property to create the monad model
