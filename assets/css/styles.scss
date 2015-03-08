@@ -1,9 +1,9 @@
-$space=65px;
-$light=#eee;
-$medium=#ccc;
-$dark=#aaa;
-$fontSize= 22px;
-$sidePad = $space - $fontSize;
+$space:65px;
+$light:#eee;
+$medium:#ccc;
+$dark:#aaa;
+$fontSize:22px;
+$sidePad: $space - $fontSize;
 .navSpace{
     height:48%;
 }
