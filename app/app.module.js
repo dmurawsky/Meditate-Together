@@ -3,23 +3,48 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	$routeProvider.when('/:monad', {
 		templateUrl: 'app/components/monad.html',
 		controller: 'monadCtrl'
+	}).when('/:monad/:view', {
+		templateUrl: 'app/components/view.html',
+		controller: 'viewCtrl'
 	}).when('/', {
 		templateUrl: 'app/components/search.html',
 		controller: 'searchCtrl'
 	});
 })
-.controller("monadCtrl", ["$scope", "$rootScope", "$firebase", "$routeParams", "$location", function($scope, $rootScope, $firebase, $routeParams, $location){
+.controller("monadCtrl", ["$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function($scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	var ref = new Firebase("https://soil.firebaseio.com/"+$routeParams.monad);
 	var sync = $firebase(ref).$asObject();
 	sync.$bindTo($scope, "monad");
 	ref.once("value", function(snap){
 		var title = snap.hasChild('title');
 		if(!title){
-			ref.child("title").set($routeParams.monad);
+			var sanTitle = $filter('sanInput')($routeParams.monad);
+			ref.child("title").set(sanTitle);
 		}
 	});
 	$scope.makeConnection = function(newConnection, newRelationship){
-		ref.child("/connections/"+newRelationship+"/"+newConnection).set(true);
+		var sanConnection = $filter('sanInput')(newConnection);
+		var sanRelationship = $filter('sanInput')(newRelationship);
+		ref.child("/connections/"+sanRelationship+"/"+sanConnection).set(true);
+		$scope.newConnection = "";
+		$scope.newRelationship = "";
+	}
+}])
+.controller("viewCtrl", ["$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function($scope, $rootScope, $firebase, $routeParams, $location, $filter){
+	var monadRef = new Firebase("https://soil.firebaseio.com/"+$routeParams.monad);
+	var monadSync = $firebase(monadRef).$asObject();
+	monadSync.$bindTo($scope, "monad");
+	monadRef.once("value", function(snap){
+		var title = snap.hasChild('title');
+		if(!title){
+			var sanTitle = $filter('sanInput')($routeParams.monad);
+			ref.child("title").set(sanTitle);
+		}
+	});
+	$scope.makeConnection = function(newConnection, newRelationship){
+		var sanConnection = $filter('sanInput')(newConnection);
+		var sanRelationship = $filter('sanInput')(newRelationship);
+		ref.child("/connections/"+sanRelationship+"/"+sanConnection).set(true);
 		$scope.newConnection = "";
 		$scope.newRelationship = "";
 	}
