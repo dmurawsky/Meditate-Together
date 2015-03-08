@@ -1,0 +1,89 @@
+.navSpace {
+  height: 48%;
+}
+
+.sides p {
+  position: relative;
+  text-align: center;
+  top: 21.5px;
+  bottom: 21.5px;
+}
+
+.sides {
+  position: absolute;
+  font-family: Arial;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+#monad {
+  position: absolute;
+  top: 65px;
+  left: 65px;
+  bottom: 65px;
+  right: 65px;
+}
+
+#n {
+  top: 16.25px;
+  height: 65px;
+  left: 65px;
+  right: 65px;
+}
+
+#nw {
+  left: 0px;
+  width: 65px;
+  top: 0px;
+  height: 65px;
+}
+
+#ne {
+  right: 0px;
+  width: 65px;
+  top: 0px;
+  height: 65px;
+}
+
+#e {
+  cursor: pointer;
+  right: 0px;
+  top: 65px;
+  bottom: 65px;
+  width: 65px;
+}
+
+#se {
+  right: 0px;
+  width: 65px;
+  bottom: 0px;
+  height: 65px;
+}
+
+#w {
+  cursor: pointer;
+  left: 0px;
+  width: 65px;
+  top: 65px;
+  bottom: 65px;
+}
+
+#sw {
+  left: 0px;
+  width: 65px;
+  bottom: 0px;
+  height: 65px;
+}
+
+#s {
+  border-radius: 15px;
+  bottom: -65px;
+  height: 130px;
+  left: 65px;
+  right: 65px;
+  background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#cccccc), to(#eeeeee));
+  background-image: -webkit-linear-gradient(bottom, #cccccc, #eeeeee);
+  background-image: -moz-linear-gradient(bottom, #cccccc, #eeeeee);
+  background-image: -o-linear-gradient(bottom, #cccccc, #eeeeee);
+  background-image: linear-gradient(bottom, #cccccc, #eeeeee);
+}
