@@ -54,7 +54,7 @@
   overflow:auto;
 }
 .noSidebar #monad{
-  width:78%;
+  width:80%;
 }
 .noSidebar #w, .noSidebar #e{
   width:10%;
@@ -63,14 +63,14 @@
   width:40%;
 }
 .leftSidebar #monad, .rightSidebar #monad{
-  width:48%;
+  width:50%;
 }
 .rightSidebar #e{
   width:40%;
 }
 #s {
   float:left;
-  width:78%;
+  width:80%;
   height:65px;
   border-radius: 15px;
   background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#cccccc), to(#eeeeee));
