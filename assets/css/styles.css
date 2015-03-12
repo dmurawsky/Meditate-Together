@@ -1,6 +1,8 @@
-#s a{
+#s p{
   text-align:left!important;
-  margin-right:10px;
+}
+#s a{
+  margin:0 5px;
 }
 .wrapper{
   position:absolute;
