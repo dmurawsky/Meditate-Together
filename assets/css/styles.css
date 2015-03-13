@@ -63,6 +63,7 @@
 #ne {
 }
 #monad {
+  box-shadow:inset 0 0 10px #333;
   float:left;
   overflow:auto;
   height:100%;
