@@ -1,6 +1,5 @@
 <div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
+	<div class="col-md-12">
 		<h1>{{monad.title}}</h1><hr>
 		<div class="row">
 			<div class="col-md-4" ng-repeat="(name, connection) in ux" ng-cloak>
@@ -14,15 +13,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-2">
-		<form>
-			<div style="text-align:center!important;">
-				<p>{{monad.title}}</p>
-				<input type="text" class="form-control" ng-model="newRelationship" placeholder="Relationship">
-				<input type="text" class="form-control" ng-model="newConnection" placeholder="Connection">
-			</div>
-			<button type="submit" class="btn btn-primary btn-block" ng-click="makeConnection(newConnection, newRelationship)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-		</form>
 	</div>
 </div>
