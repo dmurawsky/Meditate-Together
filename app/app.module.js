@@ -52,7 +52,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	}
 }])
 .controller("HomeCtrl", ["Soil", "$scope", "$rootScope", "$firebase", function(Soil, $scope, $rootScope, $firebase){
-	var sync = $firebase(Soil.ref).$asObject();
+	var sync = $firebase(Soil.ref()).$asObject();
 	sync.$loaded(function() {
 		sync.$bindTo($scope, "data");
 	});
