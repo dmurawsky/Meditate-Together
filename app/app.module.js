@@ -9,7 +9,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'SearchCtrl'
 	});
 })
-.factory('Connection', ["$filter", "$firebase", function ($filter, $firebase){
+.factory('Soil', ["$filter", "$firebase", function ($filter, $firebase){
 	return {
 		create: function(monad, newCon, newRel){
 			//create a connection by adding a connection and relationship and setting the value to true
@@ -24,16 +24,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	};
 }])
-.factory('Data', ["$filter", "$firebase", function ($filter, $firebase){
-	return {
-		addNew: function(newDataType, newDataTitle, newData){
-			//create a connection by adding a connection and relationship and setting the value to true
-			var ref = new Firebase("https://soil.firebaseio.com/connections/");
-			
-		}
-	};
-}])
-.controller("AppCtrl", ["Data", "Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Data, Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
+.controller("AppCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
 	var ref = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
 	var sync = $firebase(ref).$asObject();
