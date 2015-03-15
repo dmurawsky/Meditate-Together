@@ -9,18 +9,23 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'SearchCtrl'
 	});
 })
-.factory('Soil', ["$filter", "$firebase", function ($filter, $firebase){
+.factory('Soil', ["$firebase", function ($firebase){
 	return {
-		create: function(monad, newCon, newRel){
-			//create a connection by adding a connection and relationship and setting the value to true
-			var ref = new Firebase("https://soil.firebaseio.com/connections/");
-			var sanConnection = $filter('sanInput')(newCon);
-			var sanRelationship = $filter('sanInput')(newRel);
-			var connection = ref.push({mon:monad,con:newCon,rel:newRel});
-			var monRef = new Firebase("https://soil.firebaseio.com/monads/");
-			monRef.child(monad+"/"+connection.key()).set({access:"public"});
-			monRef.child(sanConnection+"/"+connection.key()).set({access:"public"});
-			monRef.child(sanRelationship+"/"+connection.key()).set({access:"public"});
+		data: function(data, id){
+			var ref = new Firebase("https://soil.firebaseio.com/");
+			//create a new data entry if new data, else update
+			var dataId = null;
+			if(id){
+				ref.child(id).update({data:data});
+			}else{
+				var dataId = ref.push({data:data});
+			}
+			return dataId;
+		},
+		newData: function(data){
+			//create a new data entry
+			var ref = new Firebase("https://soil.firebaseio.com/");
+			var data = ref.push({data:data});
 		}
 	};
 }])
@@ -45,10 +50,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		$scope.newConnection = "";
 		$scope.newRelationship = "";
 	}
-	$scope.saveData = function(newDataType, newData){
-		Data.addNew($routeParams.monad, newConnection, newRelationship);
-		$scope.newConnection = "";
-		$scope.newRelationship = "";
+	$scope.saveData = function(data){
+		Soil.data(data);
+		$scope.newData = "";
 	}
 }])
 .controller("MonadCtrl", ["Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
