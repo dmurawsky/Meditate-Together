@@ -1,5 +1,5 @@
 <!doctype HTML>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>SOIL</title>
 </head>
-<body style="padding-top:50px;">
+<body ng-controller="MonadCtrl">
 	<div id="wrapper">
 		<div id="northWrapper" class="wrapper">
 		    <div id="nw" class="sides">
@@ -24,7 +24,7 @@
 		    <div id="w" class="sides">
 		        <h4>Data Types</h4>
 		    </div>
-		    <div id="monad" ng-app="app" ng-view></div>
+		    <div id="monad" ng-view></div>
 		    <div id="e" class="sides">
 		        <h4>Apps</h4>
 		    </div>
