@@ -33,7 +33,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	};
 }])
-.controller("MonadCtrl", ["Data", "Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
+.controller("AppCtrl", ["Data", "Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
 	var ref = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
 	var sync = $firebase(ref).$asObject();
@@ -60,7 +60,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		$scope.newRelationship = "";
 	}
 }])
-.controller("ViewCtrl", ["Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
+.controller("MonadCtrl", ["Connection", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Connection, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
 	var monadRef = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
 	var monadSync = $firebase(monadRef).$asObject();
