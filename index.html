@@ -57,7 +57,9 @@
 					<h4 class="modal-title">Add Data</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" class="form-control" ng-model="newDataType" placeholder="Type of Data">
+					<input type="text" class="form-control" ng-model="newDataType" placeholder="Type of Data" required><br>
+					<input type="text" class="form-control" ng-model="newDataTitle" placeholder="Data Title"><br>
+					{{newDataTitle | sanInput}}<br><br>
 					<textarea class="form-control" ng-model="newData" placeholder="Data"></textarea>
 				</div>
 				<div class="modal-footer">
