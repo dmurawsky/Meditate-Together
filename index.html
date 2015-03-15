@@ -57,14 +57,11 @@
 					<h4 class="modal-title">Add Data</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" class="form-control" ng-model="newDataType" placeholder="Type of Data" required><br>
-					<input type="text" class="form-control" ng-model="newDataTitle" placeholder="Data Title"><br>
-					{{newDataTitle | sanInput}}<br><br>
-					<textarea class="form-control" ng-model="newData" placeholder="Data"></textarea>
+					<textarea class="form-control" ng-model="newData" placeholder="Data" required></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" ng-click="saveData(newDataType, newData)">Save</button>
+					<button type="button" class="btn btn-primary" ng-click="saveData(newData)">Save</button>
 				</div></form>
 			</div>
 		</div>
