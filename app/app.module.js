@@ -47,6 +47,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }])
 .factory('RouteParams', ["$location", function ($location){
 	var params = $location.path().split("/");
+	console.log(params);
 	return {form:params[1], data:params[2], view:params[3]};
 }])
 .controller("AppCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
