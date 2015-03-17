@@ -124,4 +124,4 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		input = input.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
 		return input.trim();
 	};
-});;
+});
