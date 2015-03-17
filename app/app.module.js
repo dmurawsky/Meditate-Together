@@ -75,9 +75,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		sync.$bindTo($scope, "data");
 	});
 }])
-.controller("TestCtrl", ["Soil", "$scope", "$rootScope", "$firebase", function(Soil, $scope, $rootScope, $firebase){
-	this.test = "OH YWAH!!";
-}])
 //filter for sanitizing strings for links
 .filter("sanInput", function() {
 	return function(input) {
