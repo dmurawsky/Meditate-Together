@@ -35,7 +35,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }])
 .controller("FormCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location){
 	//Gets the form name from the url and loads the proper html and ctrl
-	$scope.templateUrl = 'app/components/'+$routParams.form+'.html';
+	$scope.templateUrl = 'app/components/'+$routeParams.form+'.html';
 }])
 .controller("DataCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
