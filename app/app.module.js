@@ -30,13 +30,19 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 .factory('Soil', ["$firebase", function ($firebase){
 	var ref = new Firebase("https://soil.firebaseio.com/");
 	return {
-		data: function(data, id){
+		params: function(){
+			var params = $location.path().split("/");
+			console.log(params);
+			return {form:params[1], data:params[2], view:params[3]};
+		},
+		data: function(form, data, id){
 			//create a new data entry if new data, else update
 			var dataId = null;
 			if(id){
-				ref.child(id).update({data:data});
+				dataId = id;
+				ref.child(form+'/'+id).update({data:data});
 			}else{
-				var dataId = ref.push({data:data});
+				dataId = ref.child(form).push({data:data});
 			}
 			return dataId;
 		},
@@ -44,15 +50,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			return ref;
 		}
 	};
-}])
-.factory('RouteParams', ["$location", function ($location){
-	return {
-		params: function(){
-			var params = $location.path().split("/");
-			console.log(params);
-			return {form:params[1], data:params[2], view:params[3]};
-		}
-	}
 }])
 .controller("AppCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object

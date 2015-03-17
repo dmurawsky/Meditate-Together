@@ -1,3 +1,3 @@
-app.controller("form", ['RouteParams', function(RouteParams){
-	this.fdv = RouteParams.params();
+app.controller("form", ['Soil', function(Soil){
+	this.fdv = Soil.params();
 }]);
