@@ -45,6 +45,10 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	};
 }])
+.factory('RouteParams', ["$location", function ($location){
+	var params = $location.path().split("/");
+	return {form:params[1], data:params[2], view:params[3]};
+}])
 .controller("AppCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
 	//angularFire sync object
 	var ref = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);

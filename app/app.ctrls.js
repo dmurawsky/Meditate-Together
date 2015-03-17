@@ -1,4 +1,3 @@
-app.controller("form", ["$scope", "$routeParams", function($scope, $routeParams){
-	$scope.rps = $routeParams;
-	this.test = "test";
-}])
+app.controller("form", ['RouteParams', function(RouteParams){
+	this.fdv = RouteParams;
+}]);
