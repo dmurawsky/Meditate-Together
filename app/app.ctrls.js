@@ -1,3 +1,3 @@
 app.controller("form", ['RouteParams', function(RouteParams){
-	this.fdv = RouteParams;
+	this.fdv = RouteParams.params();
 }]);
