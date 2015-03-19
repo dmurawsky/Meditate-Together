@@ -35,7 +35,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			console.log(params);
 			return {form:params[1], data:params[2], view:params[3]};
 		},
-		data: function(childForm, childData, childId, parentForm, parentData, parentId, callback){
+		data: function(childForm, childData, childId, parentForm, parentData, parentId){
 			//If dataId and parentId are given, then we're just updating 
 			//So go in and update parent data and child data
 			var cId = childId;
@@ -75,9 +75,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			}else if(!childForm && !childData && !childId && parentForm && parentData && !parentId){
 				pId = ref.child(parentForm).push({data:parentData}, errorCb);
 			}
-			if (typeof callback === "function") {
-    			callback();
-			} else {console.log('Failed to run callback');}
+			//if (typeof callback === "function") {
+    		//	callback();
+			//} else {console.log('Failed to run callback');}
 			return {parent:pId,child:cId};
 		},
 		ref: function(){
