@@ -53,6 +53,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 				ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
 				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
 				ref.child(childForm+'/'+childId+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId}, errorCb);
+				return {parent:pId,child:cId};
 			}else if(childForm && childData && childId && parentForm && parentData && !parentId){
 				console.log("2");
 				pId = ref.child(parentForm).push({data:parentData}, function(error){
@@ -60,6 +61,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 						ref.child(parentForm+'/'+pId.key()+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
 						ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
 						ref.child(childForm+'/'+childId+'/'+parentForm+'/'+pId.key()).update({link:parentForm+'/'+pId.key()}, errorCb);
+						return {parent:pId,child:cId};
 					}
 				});
 			}else if(childForm && childData && !childId && parentForm && parentData && !parentId){
@@ -70,6 +72,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 							if(pError){console.log(pError);}else{
 								ref.child(parentForm+'/'+pId.key()+'/'+childForm+'/'+cId.key()).update({link:childForm+'/'+cId.key()}, errorCb);
 								ref.child(childForm+'/'+cId.key()+'/'+parentForm+'/'+pId.key()).update({link:parentForm+'/'+pId.key()}, errorCb);
+								return {parent:pId,child:cId};
 							}
 						});
 					}
@@ -77,22 +80,27 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			}else if(childForm && childData && childId && !parentForm && !parentData && !parentId){
 				console.log("4");
 				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
+				return {parent:pId,child:cId};
 			}else if(!childForm && !childData && !childId && parentForm && parentData && parentId){
 				console.log("5");
 				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
+				return {parent:pId,child:cId};
 			}else if(childForm && childData && !childId && !parentForm && !parentData && !parentId){
 				console.log("6");
-				cId = ref.child(childForm).push({data:childData}, errorCb);
+				cId = ref.child(childForm).push({data:childData}, function(error){
+					if(error){console.log(error);}else{return {parent:pId,child:cId};}
+				});
 			}else if(!childForm && !childData && !childId && parentForm && parentData && !parentId){
 				console.log("7");
-				pId = ref.child(parentForm).push({data:parentData}, errorCb);
+				pId = ref.child(parentForm).push({data:parentData}, function(error){
+					if(error){console.log(error);}else{return {parent:pId,child:cId};}
+				});
 			}else{
 				console.log("8");
 			}
 			if (typeof callback === "function") {
     			callback();
 			} else {console.log('Failed to run callback');}
-			return {parent:pId,child:cId};
 		},
 		ref: function(){
 			return ref;
