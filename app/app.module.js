@@ -36,6 +36,12 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			return {form:params[1], data:params[2], view:params[3]};
 		},
 		data: function(childForm, childData, childId, parentForm, parentData, parentId, callback){
+			console.log(childForm);
+			console.log(childData);
+			console.log(childId);
+			console.log(parentForm);
+			console.log(parentData);
+			console.log(parentId);
 			//If dataId and parentId are given, then we're just updating 
 			//So go in and update parent data and child data
 			var cId = childId;
