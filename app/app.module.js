@@ -35,7 +35,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			console.log(params);
 			return {form:params[1], data:params[2], view:params[3]};
 		},
-		data: function(childForm, childData, childId, parentForm, parentData, parentId, callback){
+		data: function(childForm, childData, childId, parentForm, parentData, parentId){
 			console.log(childForm);
 			console.log(childData);
 			console.log(childId);
@@ -98,9 +98,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			}else{
 				console.log("8");
 			}
-			if (typeof callback === "function") {
-    			callback();
-			} else {console.log('Failed to run callback');}
+			//if (typeof callback === "function") {
+    		//	callback();
+			//} else {console.log('Failed to run callback');}
 		},
 		ref: function(){
 			return ref;
