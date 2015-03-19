@@ -68,6 +68,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			}else if(childForm && childData && childId && !parentForm && !parentData && !parentId){
 				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
 			}else if(!childForm && !childData && !childId && parentForm && parentData && parentId){
+				console.log("good")
 				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
 			}else if(childForm && childData && !childId && !parentForm && !parentData && !parentId){
 				cId = ref.child(childForm).push({data:childData}, errorCb);
