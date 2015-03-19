@@ -42,11 +42,13 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var pId = parentId;
 			var errorCb = function(error){if(error){console.log(error);}}
 			if(childForm && childData && childId && parentForm && parentData && parentId){
-				ref.child(parentForm+'/'+parentId).update({data:parentData});
-				ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId});
-				ref.child(childForm+'/'+childId).update({data:childData,});
-				ref.child(childForm+'/'+childId+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId});
+				console.log("1");
+				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
+				ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
+				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
+				ref.child(childForm+'/'+childId+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId}, errorCb);
 			}else if(childForm && childData && childId && parentForm && parentData && !parentId){
+				console.log("2");
 				pId = ref.child(parentForm).push({data:parentData}, function(error){
 					if(error){console.log(error);}else{
 						ref.child(parentForm+'/'+pId.key()+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
@@ -55,6 +57,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 					}
 				});
 			}else if(childForm && childData && !childId && parentForm && parentData && !parentId){
+				console.log("3");
 				cId = ref.child(childForm).push({data:childData}, function(cError){
 					if(cError){console.log(cError);}else{
 						pId = ref.child(parentForm).push({data:parentData}, function(pError){
@@ -66,14 +69,19 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 					}
 				});
 			}else if(childForm && childData && childId && !parentForm && !parentData && !parentId){
+				console.log("4");
 				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
-			}else if(childForm == false && childData == false && childId == false && parentForm && parentData && parentId){
-				console.log("good")
+			}else if(!childForm && !childData && !childId && parentForm && parentData && parentId){
+				console.log("5");
 				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
 			}else if(childForm && childData && !childId && !parentForm && !parentData && !parentId){
+				console.log("6");
 				cId = ref.child(childForm).push({data:childData}, errorCb);
 			}else if(!childForm && !childData && !childId && parentForm && parentData && !parentId){
+				console.log("7");
 				pId = ref.child(parentForm).push({data:parentData}, errorCb);
+			}else{
+				console.log("8");
 			}
 			if (typeof callback === "function") {
     			callback();
