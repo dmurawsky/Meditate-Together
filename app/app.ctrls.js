@@ -2,7 +2,7 @@ app.controller("formForm", ['Soil', function(Soil){
 	var ctrl = this;
 	this.saveData = function(formTitle){
 		var formId = formTitle.replace(/[^a-z0-9]/gi, '');
-		var newIds = Soil.data(null, null, null, 'form', formTitle, formId);
+		var newIds = Soil.data('', '', '', 'form', formTitle, formId);
 		ctrl.formTitle = '';
 	}
 }]);
