@@ -1,1 +1,10 @@
-<div ng-controller="form as ctrl">Form: {{ctrl.fdv.form}}</div>
+<div ng-controller="formForm as ctrl">
+	<h2>Create New Form</h2>
+	<form>
+		<div class="form-group">
+			<label for="formTitle">Form Title</label>
+			<input type="email" class="form-control" id="formTitle" ng-model="ctrl.formTitle" placeholder="Enter Title">
+		</div>
+		<button type="submit" class="btn btn-primary" ng-click="saveData(ctrl.formTitle)">Submit</button>
+	</form>
+</div>
