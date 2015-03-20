@@ -79,10 +79,10 @@ body{
   overflow:auto;
 }
 .noSidebar #monad{
-  width:100%;
+  width:80%;
 }
 .noSidebar #w, .noSidebar #e{
-  width:65px;
+
 }
 .leftSidebar #w{
   width:40%;
