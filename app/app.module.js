@@ -56,6 +56,15 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 						return {parent:pId,child:cId};
 					}
 				});
+			}else if(childForm && childData && !childId && parentForm && parentData && parentId){
+				cId = ref.child(childForm).push({data:childData}, function(error){
+					if(error){console.log(error);}else{
+						ref.child(childForm+'/'+cId.key()+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId}, errorCb);
+						ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
+						ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+cId.key()).update({link:childForm+'/'+cId.key()}, errorCb);
+						return {parent:pId,child:cId};
+					}
+				});
 			}else if(childForm && childData && !childId && parentForm && parentData && !parentId){
 				cId = ref.child(childForm).push({data:childData}, function(cError){
 					if(cError){console.log(cError);}else{
