@@ -82,7 +82,7 @@ body{
   width:80%;
 }
 .noSidebar #w, .noSidebar #e{
-  width:10%;
+  width:65px;
 }
 .leftSidebar #w{
   width:40%;
