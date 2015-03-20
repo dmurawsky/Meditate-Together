@@ -52,7 +52,7 @@ body{
   font-family: Arial;
   font-size: 22px;
   text-decoration: none;
-  width:10%;
+  width:6%;
   float:left;
 }
 #n {
@@ -79,7 +79,7 @@ body{
   overflow:auto;
 }
 .noSidebar #monad{
-  width:80%;
+  width:88%;
 }
 .noSidebar #w, .noSidebar #e{
 
