@@ -36,26 +36,18 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			return {form:params[1], data:params[2], view:params[3]};
 		},
 		data: function(childForm, childData, childId, parentForm, parentData, parentId){
-			console.log(childForm);
-			console.log(childData);
-			console.log(childId);
-			console.log(parentForm);
-			console.log(parentData);
-			console.log(parentId);
 			//If dataId and parentId are given, then we're just updating 
 			//So go in and update parent data and child data
 			var cId = childId;
 			var pId = parentId;
 			var errorCb = function(error){if(error){console.log(error);}}
 			if(childForm && childData && childId && parentForm && parentData && parentId){
-				console.log("1");
 				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
 				ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
 				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
 				ref.child(childForm+'/'+childId+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId}, errorCb);
 				return {parent:pId,child:cId};
 			}else if(childForm && childData && childId && parentForm && parentData && !parentId){
-				console.log("2");
 				pId = ref.child(parentForm).push({data:parentData}, function(error){
 					if(error){console.log(error);}else{
 						ref.child(parentForm+'/'+pId.key()+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
@@ -65,7 +57,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 					}
 				});
 			}else if(childForm && childData && !childId && parentForm && parentData && !parentId){
-				console.log("3");
 				cId = ref.child(childForm).push({data:childData}, function(cError){
 					if(cError){console.log(cError);}else{
 						pId = ref.child(parentForm).push({data:parentData}, function(pError){
@@ -78,25 +69,21 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 					}
 				});
 			}else if(childForm && childData && childId && !parentForm && !parentData && !parentId){
-				console.log("4");
 				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
 				return {parent:pId,child:cId};
 			}else if(!childForm && !childData && !childId && parentForm && parentData && parentId){
-				console.log("5");
 				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
 				return {parent:pId,child:cId};
 			}else if(childForm && childData && !childId && !parentForm && !parentData && !parentId){
-				console.log("6");
 				cId = ref.child(childForm).push({data:childData}, function(error){
 					if(error){console.log(error);}else{return {parent:pId,child:cId};}
 				});
 			}else if(!childForm && !childData && !childId && parentForm && parentData && !parentId){
-				console.log("7");
 				pId = ref.child(parentForm).push({data:parentData}, function(error){
 					if(error){console.log(error);}else{return {parent:pId,child:cId};}
 				});
 			}else{
-				console.log("8");
+				console.log("Failed to meet put criteria.");
 			}
 			//if (typeof callback === "function") {
     		//	callback();
@@ -121,15 +108,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		if(!title){
 		}
 	});
-	$scope.makeConnection = function(newConnection, newRelationship){
-		Connection.create($routeParams.monad, newConnection, newRelationship);
-		$scope.newConnection = "";
-		$scope.newRelationship = "";
-	}
-	$scope.saveData = function(data){
-		Soil.data(data);
-		$scope.newData = "";
-	}
 }])
 .controller("HomeCtrl", ["Soil", "$scope", "$rootScope", "$firebase", function(Soil, $scope, $rootScope, $firebase){
 	var sync = $firebase(Soil.ref()).$asObject();
