@@ -3,7 +3,7 @@ app.controller("formForm", ['Soil', function(Soil){
 	this.saveData = function(title){
 		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
 		var date = Date.now();
-		Soil.data('Date', date, false, 'form', title, formId);
+		Soil.data('date', date, false, 'form', title, formId);
 		test.formTitle = '';
 	}
 }]);
