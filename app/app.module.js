@@ -101,25 +101,5 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	};
 }])
-.controller("AppCtrl", ["Soil", "$scope", "$rootScope", "$firebase", "$routeParams", "$location", "$filter", function(Soil, $scope, $rootScope, $firebase, $routeParams, $location, $filter){
-	//angularFire sync object
-	var ref = new Firebase("https://soil.firebaseio.com/monads/"+$routeParams.monad);
-	var sync = $firebase(ref).$asObject();
-	sync.$loaded(function(data) {
-		sync["test"] = "testy";
-		sync.$bindTo($scope, "monad");
-	});
-	//if this is the first time visiting this link add the title property to create the monad model
-	ref.once("value", function(snap){
-		var title = snap.hasChild('title');
-		if(!title){
-		}
-	});
-}])
-//filter for sanitizing strings for links
-.filter("sanInput", function() {
-	return function(input) {
-		input = input.replace(/[^a-z0-9]/gi, '-');
-		return input.trim();
-	};
-});
+.controller("AppCtrl", [function(){
+}]);
