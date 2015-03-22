@@ -7,7 +7,7 @@
 		</div>
 		<button type="submit" class="btn btn-primary" ng-click="ctrl.saveData(ctrl.formTitle)">Submit</button>
 	</form><hr>
-	<div ng-repeat="(name, form) in ctrl.forms" class="panel panel-default">
+	<div ng-repeat="(name, form) in forms" class="panel panel-default">
 		<div class="panel-body">
 			<a href="#/{{name}}"><h3>{{form.data}}</h3></a>
 			<p>{{form.time | date:'short'}}</p>
