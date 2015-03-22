@@ -10,7 +10,6 @@ app.controller("formForm", ['Soil', '$firebaseObject', function(Soil, $firebaseO
 	var obj = $firebaseObject(ref.child('form'));
 	// The $loaded() promise signifies that the initial state has been downloaded
 	obj.$loaded().then(function() {
-		obj.$bindTo(formCtrl, "forms");
 		angular.forEach(obj, function(value, key) {
 			angular.forEach(value.createdtime, function(timeValue, timeKey){
 				ref.child(timeValue.link).once('value', function(snap){
@@ -21,6 +20,7 @@ app.controller("formForm", ['Soil', '$firebaseObject', function(Soil, $firebaseO
 		});
 		console.log("forms loaded");
 	});
+	obj.$bindTo(formCtrl, "forms");
 }])
 .controller("formData", ['Soil', function(Soil){
 }])
