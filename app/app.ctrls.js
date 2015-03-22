@@ -12,7 +12,9 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 	// The $loaded() promise signifies that the initial state has been downloaded
 	obj.$loaded().then(function() {
 		angular.forEach(obj, function(value, key) {
+			console.log(key+" - "+value);
 			angular.forEach(value.createdtime, function(timeValue, timeKey){
+				console.log(timeKey +" - "+ timeValue);
 				ref.child(timeValue.link).once('value', function(snap){
 					var val = snap.val();
 					obj[key].time = val.data;
