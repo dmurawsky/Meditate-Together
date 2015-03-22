@@ -15,6 +15,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'HomeCtrl'
 	});
 })
+.constant('FBURL', 'https://soil.firebaseio.com/')
 .controller("FormCtrl", ["$scope", "$routeParams", function($scope, $routeParams){
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';
@@ -27,15 +28,15 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';
 }])
-.factory('Soil', ["$firebase", function ($firebase){
-	var ref = new Firebase("https://soil.firebaseio.com/");
+.factory('Soil', [function (){
+	var ref = new Firebase(FBURL);
 	return {
-		params: function(){
+		path: function(){
 			var params = $location.path().split("/");
 			console.log(params);
 			return {form:params[1], data:params[2], view:params[3]};
 		},
-		data: function(childForm, childData, childId, parentForm, parentData, parentId){
+		put: function(childForm, childData, childId, parentForm, parentData, parentId){
 			//If dataId and parentId are given, then we're just updating 
 			//So go in and update parent data and child data
 			var cId = childId;
@@ -97,9 +98,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			//if (typeof callback === "function") {
     		//	callback();
 			//} else {console.log('Failed to run callback');}
-		},
-		ref: function(){
-			return ref;
 		}
 	};
 }])
@@ -116,12 +114,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		var title = snap.hasChild('title');
 		if(!title){
 		}
-	});
-}])
-.controller("HomeCtrl", ["Soil", "$scope", "$rootScope", "$firebase", function(Soil, $scope, $rootScope, $firebase){
-	var sync = $firebase(Soil.ref()).$asObject();
-	sync.$loaded(function() {
-		sync.$bindTo($scope, "data");
 	});
 }])
 //filter for sanitizing strings for links

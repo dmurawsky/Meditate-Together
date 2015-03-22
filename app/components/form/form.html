@@ -6,5 +6,11 @@
 			<input type="text" class="form-control" id="formTitle" ng-model="ctrl.formTitle" placeholder="Enter Title">
 		</div>
 		<button type="submit" class="btn btn-primary" ng-click="ctrl.saveData(ctrl.formTitle)">Submit</button>
-	</form>
+	</form><hr>
+	<div ng-repeat="(name, form) in forms" class="panel panel-default">
+		<div class="panel-body">
+			<a href="#/form/{{name}}">{{form.data}}</a><br>
+			<p>{{form.time}}</p>
+		</div>
+	</div>
 </div>
