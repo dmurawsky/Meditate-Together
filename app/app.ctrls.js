@@ -3,7 +3,8 @@ app.controller("formForm", ['Soil', '$firebaseObject', function(Soil, $firebaseO
 	this.saveData = function(title){
 		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
 		var date = Date.now();
-		var newForm = Soil.put('createdtime', date, date.toString(), 'form', title, formId);
+		var dateID = date.toString();
+		var newForm = Soil.put('createdtime', date, dateID, 'form', title, formId);
 		formCtrl.formTitle = '';
 	};
 	var ref = new Firebase(Soil.url);
