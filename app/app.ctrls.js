@@ -1,4 +1,4 @@
-app.controller("formForm", ['Soil', '$firebaseObject', function(Soil, $firebaseObject){
+app.controller("formForm", ['Soil', '$firebaseObject', '$scope' function(Soil, $firebaseObject, $scope){
 	var formCtrl = this;
 	this.saveData = function(title){
 		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
@@ -21,7 +21,7 @@ app.controller("formForm", ['Soil', '$firebaseObject', function(Soil, $firebaseO
 		});
 		console.log("forms loaded");
 	});
-	obj.$bindTo(formCtrl, "forms");
+	obj.$bindTo($scope, "forms");
 }])
 .controller("formData", ['Soil', function(Soil){
 }])
