@@ -24,9 +24,5 @@ app.controller("formForm", ['Soil', function(Soil){
 }])
 .controller("formData", ['Soil', function(Soil){
 }])
-.controller("HomeCtrl", ["Soil", "$scope", "$firebase", function(Soil, $scope, $firebase){
-	var sync = $firebase(Soil.ref()).$asObject();
-	sync.$loaded(function() {
-		sync.$bindTo($scope, "data");
-	});
+.controller("HomeCtrl", ["Soil", function(Soil){
 }]);
