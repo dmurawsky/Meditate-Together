@@ -1,4 +1,4 @@
-app.controller("formForm", ['Soil', '$firebaseObject', '$scope' function(Soil, $firebaseObject, $scope){
+app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, $firebaseObject, $scope){
 	var formCtrl = this;
 	this.saveData = function(title){
 		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
