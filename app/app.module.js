@@ -15,7 +15,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'HomeCtrl'
 	});
 })
-.constant('FBURL', 'https://soil.firebaseio.com/')
 .controller("FormCtrl", ["$scope", "$routeParams", function($scope, $routeParams){
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';
@@ -28,9 +27,10 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';
 }])
-.factory('Soil', ['FBURL', function (FBURL){
-	var ref = new Firebase(FBURL);
+.factory('Soil', [function (){
+	var ref = new Firebase('https://soil.firebaseio.com/');
 	return {
+		url: 'https://soil.firebaseio.com/',
 		path: function(){
 			var params = $location.path().split("/");
 			console.log(params);

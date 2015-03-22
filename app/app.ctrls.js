@@ -6,7 +6,7 @@ app.controller("formForm", ['Soil', function(Soil){
 		var newForm = Soil.put('createdtime', date, date.toString(), 'form', title, formId);
 		formCtrl.formTitle = '';
 	};
-	var ref = new Firebase(FBURL);
+	var ref = new Firebase(Soil.url);
 	var obj = $firebaseObject(ref.child('form'));
 	// The $loaded() promise signifies that the initial state has been downloaded
 	obj.$loaded().then(function() {
