@@ -28,7 +28,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';
 }])
-.factory('Soil', [function (){
+.factory('Soil', ['FBURL', function (FBURL){
 	var ref = new Firebase(FBURL);
 	return {
 		path: function(){
