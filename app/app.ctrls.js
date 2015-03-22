@@ -15,7 +15,7 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 			console.log(key+" - "+value);
 			angular.forEach(value.createdtime, function(timeValue, timeKey){
 				console.log(timeKey +" - "+ timeValue);
-				obj[key].time = timeKey;
+				obj[key].time = Number(timeKey);
 			});
 		});
 		console.log("forms loaded");
