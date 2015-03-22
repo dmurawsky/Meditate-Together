@@ -9,8 +9,9 @@
 	</form><hr>
 	<div ng-repeat="(name, form) in forms" class="panel panel-default">
 		<div class="panel-body">
-			<a href="#/form/{{name}}"><h3>{{form.data}}</h3></a>
-			<p>{{1427007306008 | date:'short'}}</p>
+			<a href="#/{{name}}"><h3>{{form.data}}</h3></a>
+			<p>{{form.time | date:'short'}}</p>
+			<p><button class="btn btn-sm btn-danger" ng-click="deleteForm(name)">Delete</button></p>
 		</div>
 	</div>
 </div>
