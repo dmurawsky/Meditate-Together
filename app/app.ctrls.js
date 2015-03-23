@@ -11,11 +11,13 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 	this.deleteForm = function(form){
 		if (confirm("Are you sure you want to delete "+form+"?")){
 			ref.child(form).remove();
+			ref.child("form/"+form).remove();
 		}
 	};
 	var obj = $firebaseObject(ref.child('form'));
 	// The $loaded() promise signifies that the initial state has been downloaded
 	obj.$loaded().then(function() {
+		formCtrl.messages = Soil.get(obj['message']);
 		angular.forEach(obj, function(value, key) {
 			angular.forEach(value.createdtime, function(timeValue, timeKey){
 				obj[key].time = Number(timeKey);

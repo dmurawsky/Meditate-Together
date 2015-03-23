@@ -27,7 +27,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';
 }])
-.factory('Soil', [function (){
+.factory('Soil', ['$firebaseObject', function ($firebaseObject){
 	var ref = new Firebase('https://soil.firebaseio.com/');
 	return {
 		url: 'https://soil.firebaseio.com/',
@@ -98,6 +98,15 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			//if (typeof callback === "function") {
     		//	callback();
 			//} else {console.log('Failed to run callback');}
+		},
+		get: function(obj){ // this get function is for getting the data out of particular set of connections (determined by a form) underneath a form/id.
+			var newObj = {};
+			angular.forEach(obj, function(value, key){
+				var dataObj = $firebaseObject(ref.child(value.link));
+				newObj.$loaded().then(function(){
+					newObj[key] = dataObj; //this will not only get the data for this datapoint but also the connections! This is this system can repeat infinitely to make all kinds of connections.
+				});
+			});
 		}
 	};
 }])
