@@ -12,7 +12,7 @@
 		<div id="northWrapper" class="wrapper">
 		    <div id="nw" class="sides">
 		        <button ng-hide="appCtrl.authData" class="btn btn-sm btn-primary" ng-click="appCtrl.auth.$authWithOAuthPopup('google')">Login</button>
-		        <img ng-show="appCtrl.authData" ng-click="appCtrl.auth.$unauth()" src="{{appCtrl.authData.google.cachedUserProfile.picture}}">
+		        <img ng-show="appCtrl.authData" ng-click="appCtrl.auth.$unauth()" src="{{appCtrl.authData.google.cachedUserProfile.picture}}?sz=50">
 		    </div>
 		    <div id="n" class="sides">
 		        <input class="form-control" id="search" placeholder="Search" />
