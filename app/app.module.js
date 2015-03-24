@@ -3,18 +3,28 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 .config(function($routeProvider) {
 	$routeProvider.when('/:form', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'FormCtrl'
+		controller: 'FormCtrl',
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'DataCtrl'
+		controller: 'DataCtrl',
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data/:view', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'ViewCtrl'
+		controller: 'ViewCtrl',
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/', {
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
 	});
 })
+.run(["$rootScope", "$location", function($rootScope, $location) {
+	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+		if (error === "AUTH_REQUIRED") {
+			$location.path("/");
+		}
+	});
+}])
 .controller("FormCtrl", ["$scope", "$routeParams", function($scope, $routeParams){
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';
@@ -115,11 +125,12 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	var ref = new Firebase(Soil.url);
     this.auth = $firebaseAuth(ref.child('users'));
     this.auth.$onAuth(function(authData) {
-		ctrl.authData = authData;
-		console.log(authData);
-		var date = Date.now();
-		var dateID = date.toString();
-		Soil.put('lastactive', date, dateID, 'users', authData.google.displayName, authData.google.id);
-		Soil.put('useremail', date, dateID, 'users', authData.google.displayName, authData.google.id);
+    	if(authData){
+			ctrl.authData = authData;
+			console.log(authData);
+			var date = Date.now();
+			var dateID = date.toString();
+			Soil.put('lastactive', date, dateID, 'users', authData.google.displayName, authData.google.id);
+    	}
     });
 }]);

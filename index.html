@@ -15,7 +15,7 @@
 		        <img ng-show="appCtrl.authData" ng-click="appCtrl.auth.$unauth()" src="{{appCtrl.authData.google.cachedUserProfile.picture}}?sz=50">
 		    </div>
 		    <div id="n" class="sides">
-		        <input class="form-control" id="search" placeholder="Search" />
+		        <input ng-show="appCtrl.authData" class="form-control" id="search" placeholder="Search" />
 		    </div>
 		    <div id="ne" class="sides">
 		        <a href="#"><p><span class="glyphicon glyphicon-user"></span></p></a>
