@@ -120,5 +120,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		var date = Date.now();
 		var dateID = date.toString();
 		Soil.put('lastactive', date, dateID, 'users', authData.google.displayName, authData.google.id);
+		Soil.put('useremail', date, dateID, 'users', authData.google.displayName, authData.google.id);
     });
 }]);
