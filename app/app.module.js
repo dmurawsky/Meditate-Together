@@ -117,5 +117,8 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
     this.auth.$onAuth(function(authData) {
 		ctrl.authData = authData;
 		console.log(authData);
+		var date = Date.now();
+		var dateID = date.toString();
+		Soil.put('lastactive', date, dateID, 'users', authData.google.displayName, authData.google.id);
     });
 }]);
