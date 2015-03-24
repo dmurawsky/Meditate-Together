@@ -110,5 +110,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	};
 }])
-.controller("AppCtrl", [function(){
+.controller("AppCtrl", ["Soil", "$firebaseAuth", function(Soil, $firebaseAuth){
+	var ref = new Firebase(Soil.url);
+    var auth = $firebaseAuth(ref);
 }]);

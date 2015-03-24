@@ -7,11 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>SOIL</title>
 </head>
-<body ng-controller="AppCtrl">
+<body ng-controller="AppCtrl as appCtrl">
 	<div id="wrapper">
 		<div id="northWrapper" class="wrapper">
 		    <div id="nw" class="sides">
-		        <a href="#"><p><span class="glyphicon glyphicon-star"></span></p></a>
+		        <a href="#"><button class="btn btn-sm btn-primary" ng-click="appCtrl.auth.$authWithOAuthPopup('google')">Login</button></a>
 		    </div>
 		    <div id="n" class="sides">
 		        <input class="form-control" id="search" placeholder="Search" />
