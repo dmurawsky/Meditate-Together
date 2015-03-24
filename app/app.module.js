@@ -25,15 +25,15 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	});
 }])
-.controller("FormCtrl", ["$scope", "$routeParams", function($scope, $routeParams){
+.controller("FormCtrl", ["$scope", "$routeParams", "currentAuth" function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';
 }])
-.controller("DataCtrl", ["$scope", "$routeParams", function($scope, $routeParams){
+.controller("DataCtrl", ["$scope", "$routeParams", "currentAuth" function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/data.html';
 }])
-.controller("ViewCtrl", ["$scope", "$routeParams", function($scope, $routeParams){
+.controller("ViewCtrl", ["$scope", "$routeParams", "currentAuth" function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';
 }])
