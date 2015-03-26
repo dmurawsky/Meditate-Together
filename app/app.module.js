@@ -195,7 +195,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }])
 .controller("FormCtrl", ["$scope", "$routeParams", "formAuth", function($scope, $routeParams, formAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(formAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}
+	if(formAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
 .controller("DataCtrl", ["$scope", "$routeParams", "dataAuth", function($scope, $routeParams, dataAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
@@ -349,7 +349,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
     Auth.$onAuth(function(authData) {
     	if(authData){
 			$rootScope.authData = authData;
-			console.log(authData);
 			var date = Math.round(Date.now() / 1000);
 			date.substring;
 			var dateID = date.toString();
