@@ -1,5 +1,14 @@
 'use strict';
 var app = angular.module('app', ['firebase', 'ngRoute'])
+.run(["$rootScope", "$location", function($rootScope, $location) {
+	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+		// We can catch the error thrown when the $requireAuth promise is rejected
+		// and redirect the user back to the home page
+		if (error === "AUTH_REQUIRED") {
+			$location.path("/");
+		}
+	});
+}])
 .factory('Soil', ['$firebaseObject', function ($firebaseObject){
 	var fburl = 'https://soil.firebaseio.com/';
 	var ref = new Firebase(fburl);
@@ -184,17 +193,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'HomeCtrl'
 	});
 })
-.run(["$rootScope", "$location", function($rootScope, $location) {
-	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
-		// We can catch the error thrown when the $requireAuth promise is rejected
-		// and redirect the user back to the home page
-		if (error === "AUTH_REQUIRED") {
-			$location.path("/");
-		}
-	});
-}])
 .controller("FormCtrl", ["$scope", "$routeParams", "formAuth", function($scope, $routeParams, formAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
+	console.log(formAuth)
 	if(formAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
 .controller("DataCtrl", ["$scope", "$routeParams", "dataAuth", function($scope, $routeParams, dataAuth){
