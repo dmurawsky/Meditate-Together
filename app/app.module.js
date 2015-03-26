@@ -17,7 +17,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 })
 .run(["$rootScope", "$location", function($rootScope, $location){
 	$rootScope.$on("$locationChangeStart", function(event, next, current) {
-		if(!$rootScope.authData && $location.path() != "/"){
+		if(!$rootScope.authData && $location.path().length > 1){
 			console.log($location.path());
 			alert("You need to be authenticated to see this page!");
 			event.preventDefault();
