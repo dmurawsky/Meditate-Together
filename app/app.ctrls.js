@@ -3,7 +3,7 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 	var formCtrl = this;
 	this.saveData = function(title){
 		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
-		var date = Firebase.ServerValue.TIMESTAMP;
+		var date = Date.now() / 1000;
 		var dateID = date.toString();
 		var newForm = Soil.put({cForm:'createdtime', cData:date, cId:dateID, pForm:'form', pData:title, pId:formId});
 		formCtrl.formTitle = '';
