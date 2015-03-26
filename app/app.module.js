@@ -22,7 +22,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	}
 	$rootScope.$on("$locationChangeStart", function(event, next, current) {
 		if(!$rootScope.authData){
-			alert("You need to be authenticated to see this page!");
+			alert("You NEED to be authenticated to see this page!");
 			event.preventDefault();
 		}
 	});
