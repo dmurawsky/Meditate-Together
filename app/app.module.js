@@ -188,7 +188,8 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
     	if(authData){
 			$rootScope.authData = authData;
 			console.log(authData);
-			var date = Date.now() / 1000;
+			var date = Math.round(Date.now() / 1000);
+			date.substring;
 			var dateID = date.toString();
 			Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.google.id});
     	}
