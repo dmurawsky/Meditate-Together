@@ -145,38 +145,56 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 .config(function($routeProvider) {
 	$routeProvider.when('/:form', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'FormCtrl'
-	}).when('/:form/:data', {
-		templateUrl: 'app/components/urlRouter.html',
-		controller: 'DataCtrl'
-	}).when('/:form/:data/:view', {
-		templateUrl: 'app/components/urlRouter.html',
-		controller: 'ViewCtrl'
-	}).when('/', {
-		templateUrl: 'app/components/home.html',
-		controller: 'HomeCtrl',
+		controller: 'FormCtrl',
 		resolve: {
 		// controller will not be loaded until $requireAuth resolves
 		// Auth refers to our $firebaseAuth wrapper in the example above
-			"currentAuth": ["Auth", function(Auth) {
+			"formAuth": ["Auth", function(Auth) {
 			// $requireAuth returns a promise so the resolve waits for it to complete
 			// If the promise is rejected, it will throw a $stateChangeError (see above)
 				return Auth.$requireAuth();
 			}]
 		}
+	}).when('/:form/:data', {
+		templateUrl: 'app/components/urlRouter.html',
+		controller: 'DataCtrl',
+		resolve: {
+		// controller will not be loaded until $requireAuth resolves
+		// Auth refers to our $firebaseAuth wrapper in the example above
+			"dataAuth": ["Auth", function(Auth) {
+			// $requireAuth returns a promise so the resolve waits for it to complete
+			// If the promise is rejected, it will throw a $stateChangeError (see above)
+				return Auth.$requireAuth();
+			}]
+		}
+	}).when('/:form/:data/:view', {
+		templateUrl: 'app/components/urlRouter.html',
+		controller: 'ViewCtrl',
+		resolve: {
+		// controller will not be loaded until $requireAuth resolves
+		// Auth refers to our $firebaseAuth wrapper in the example above
+			"viewAuth": ["Auth", function(Auth) {
+			// $requireAuth returns a promise so the resolve waits for it to complete
+			// If the promise is rejected, it will throw a $stateChangeError (see above)
+				return Auth.$requireAuth();
+			}]
+		}
+	}).when('/', {
+		templateUrl: 'app/components/home.html',
+		controller: 'HomeCtrl'
 	});
 })
-.controller("FormCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
+.controller("FormCtrl", ["$scope", "$routeParams", "formAuth", function($scope, $routeParams, formAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}
+	if(formAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}
 }])
-.controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
+.controller("DataCtrl", ["$scope", "$routeParams", "dataAuth", function($scope, $routeParams, dataAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/data.html';}
+	if(dataAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/data.html';}
 }])
-.controller("ViewCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
+.controller("ViewCtrl", ["$scope", "$routeParams", "viewAuth", function($scope, $routeParams, viewAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
+	if(viewAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
 }])
 .factory('Soil', ['$firebaseObject', function ($firebaseObject){
 	var fburl = 'https://soil.firebaseio.com/';
