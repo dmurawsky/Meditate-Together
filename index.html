@@ -11,11 +11,11 @@
 	<div id="wrapper">
 		<div id="northWrapper" class="wrapper">
 		    <div id="nw" class="sides">
-		        <button ng-hide="appCtrl.authData" class="btn btn-sm btn-primary" ng-click="appCtrl.auth.$authWithOAuthPopup('google')">Login</button>
-		        <img ng-cloak ng-show="appCtrl.authData" ng-click="appCtrl.auth.$unauth()" src="{{appCtrl.authData.google.cachedUserProfile.picture}}?sz=50">
+		        <button ng-hide="authData" class="btn btn-sm btn-primary" ng-click="auth.$authWithOAuthPopup('google')">Login</button>
+		        <img ng-cloak ng-show="authData" ng-click="auth.$unauth()" src="{{authData.google.cachedUserProfile.picture}}?sz=50">
 		    </div>
 		    <div id="n" class="sides">
-		        <input ng-show="appCtrl.authData" class="form-control" id="search" placeholder="Search" />
+		        <input ng-show="authData" class="form-control" id="search" placeholder="Search" />
 		    </div>
 		    <div id="ne" class="sides">
 		        <a href="#"><p><span class="glyphicon glyphicon-user"></span></p></a>
@@ -24,7 +24,7 @@
 		<div id="centerWrapper" class="wrapper noSidebar">
 		    <div id="w" class="sides">
 		    </div>
-		    <div id="monad" ng-view></div>
+		    <div id="monad" ui-view></div>
 		    <div id="e" class="sides">
 		    </div>
 		</div>
@@ -74,7 +74,7 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+	<script src="assets/js/angular-ui-router.min.js"></script>
 	<script src="https://cdn.firebase.com/js/client/2.2.3/firebase.js"></script>
 	<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

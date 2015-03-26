@@ -1,27 +1,29 @@
 'use strict';
-var app = angular.module('app', ['firebase', 'ngRoute'])
+var app = angular.module('app', ['firebase', 'ng-route'])
 .config(function($routeProvider) {
 	$routeProvider.when('/:form', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'FormCtrl',
-		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
+		controller: 'FormCtrl'
 	}).when('/:form/:data', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'DataCtrl',
-		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
+		controller: 'DataCtrl'
 	}).when('/:form/:data/:view', {
 		templateUrl: 'app/components/urlRouter.html',
-		controller: 'ViewCtrl',
-		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
+		controller: 'ViewCtrl'
 	}).when('/', {
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
 	});
 })
-.run(["$rootScope", "$location", function($rootScope, $location) {
-	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
-		if (error === "AUTH_REQUIRED") {
-			$location.path("/");
+.run(["$rootScope", "$location", function($rootScope, $location){
+	if(!$rootScope.authData.google.id && $location.path() != "/"){
+		alert("You need to be authenticated to see this page!");
+		event.preventDefault();
+	}
+	$rootScope.$on("$locationChangeStart", function(event, next, current) {
+		if(!$rootScope.authData.google.id){
+			alert("You need to be authenticated to see this page!");
+			event.preventDefault();
 		}
 	});
 }])
@@ -37,16 +39,21 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//Gets the form name from the url and loads the proper html and ctrl
 	$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';
 }])
+.factory("Auth", ["Soil", "$firebaseAuth", function(Soil, $firebaseAuth){
+	var ref = new Firebase(Soil.url);
+	return $firebaseAuth(ref);
+}])
 .factory('Soil', ['$firebaseObject', function ($firebaseObject){
-	var ref = new Firebase('https://soil.firebaseio.com/');
+	var fburl = 'https://soil.firebaseio.com/';
+	var ref = new Firebase(fburl);
 	return {
-		url: 'https://soil.firebaseio.com/',
+		url: fburl,
 		path: function(){
 			var params = $location.path().split("/");
 			console.log(params);
 			return {form:params[1], data:params[2], view:params[3]};
 		},
-		put: function(childForm, childData, childId, parentForm, parentData, parentId){
+		access: function(data){
 			//If dataId and parentId are given, then we're just updating 
 			//So go in and update parent data and child data
 			var cId = childId;
@@ -103,34 +110,87 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 					if(error){console.log(error);}else{return {parent:pId,child:cId};}
 				});
 			}else{
-				console.log("Failed to meet put criteria.");
+				console.log("Failed to meet access criteria.");
 			}
 			//if (typeof callback === "function") {
     		//	callback();
 			//} else {console.log('Failed to run callback');}
 		},
-		get: function(obj){ // this get function is for getting the data out of particular set of connections (determined by a form) underneath a form/id.
-			var newObj = {};
-			angular.forEach(obj, function(value, key){
-				var dataObj = $firebaseObject(ref.child(value.link));
-				newObj.$loaded().then(function(){
-					newObj[key] = dataObj; //this will not only get the data for this datapoint but also the connections! This is this system can repeat infinitely to make all kinds of connections.
+		put: function(data){
+			//If dataId and data.pId are given, then we're just updating 
+			//So go in and update parent data and child data
+			var cId = data.cId;
+			var pId = data.pId;
+			var errorCb = function(error){if(error){console.log(error);}}
+			if(data.cForm && data.cData && data.cId && data.pForm && data.pData && data.pId){
+				ref.child(data.pForm+'/'+data.pId).update({data:data.pData}, errorCb);
+				ref.child(data.pForm+'/'+data.pId+'/'+data.cForm+'/'+data.cId).update({link:data.cForm+'/'+data.cId}, errorCb);
+				ref.child(data.cForm+'/'+data.cId).update({data:data.cData}, errorCb);
+				ref.child(data.cForm+'/'+data.cId+'/'+data.pForm+'/'+data.pId).update({link:data.pForm+'/'+data.pId}, errorCb);
+				return {parent:pId,child:cId};
+			}else if(data.cForm && data.cData && data.cId && data.pForm && data.pData && !data.pId){
+				pId = ref.child(data.pForm).push({data:data.pData}, function(error){
+					if(error){console.log(error);}else{
+						ref.child(data.pForm+'/'+pId.key()+'/'+data.cForm+'/'+data.cId).update({link:data.cForm+'/'+data.cId}, errorCb);
+						ref.child(data.cForm+'/'+data.cId).update({data:data.cData}, errorCb);
+						ref.child(data.cForm+'/'+data.cId+'/'+data.pForm+'/'+pId.key()).update({link:data.pForm+'/'+pId.key()}, errorCb);
+						return {parent:pId,child:cId};
+					}
 				});
-			});
+			}else if(data.cForm && data.cData && !data.cId && data.pForm && data.pData && data.pId){
+				cId = ref.child(data.cForm).push({data:data.cData}, function(error){
+					if(error){console.log(error);}else{
+						ref.child(data.cForm+'/'+cId.key()+'/'+data.pForm+'/'+data.pId).update({link:data.pForm+'/'+data.pId}, errorCb);
+						ref.child(data.pForm+'/'+data.pId).update({data:data.pData}, errorCb);
+						ref.child(data.pForm+'/'+data.pId+'/'+data.cForm+'/'+cId.key()).update({link:data.cForm+'/'+cId.key()}, errorCb);
+						return {parent:pId,child:cId};
+					}
+				});
+			}else if(data.cForm && data.cData && !data.cId && data.pForm && data.pData && !data.pId){
+				cId = ref.child(data.cForm).push({data:data.cData}, function(cError){
+					if(cError){console.log(cError);}else{
+						pId = ref.child(data.pForm).push({data:data.pData}, function(pError){
+							if(pError){console.log(pError);}else{
+								ref.child(data.pForm+'/'+pId.key()+'/'+data.cForm+'/'+cId.key()).update({link:data.cForm+'/'+cId.key()}, errorCb);
+								ref.child(data.cForm+'/'+cId.key()+'/'+data.pForm+'/'+pId.key()).update({link:data.pForm+'/'+pId.key()}, errorCb);
+								return {parent:pId,child:cId};
+							}
+						});
+					}
+				});
+			}else if(data.cForm && data.cData && data.cId && !data.pForm && !data.pData && !data.pId){
+				ref.child(data.cForm+'/'+data.cId).update({data:data.cData}, errorCb);
+				return {parent:pId,child:cId};
+			}else if(!data.cForm && !data.cData && !data.cId && data.pForm && data.pData && data.pId){
+				ref.child(data.pForm+'/'+data.pId).update({data:data.pData}, errorCb);
+				return {parent:pId,child:cId};
+			}else if(data.cForm && data.cData && !data.cId && !data.pForm && !data.pData && !data.pId){
+				cId = ref.child(data.cForm).push({data:data.cData}, function(error){
+					if(error){console.log(error);}else{return {parent:pId,child:cId};}
+				});
+			}else if(!data.cForm && !data.cData && !data.cId && data.pForm && data.pData && !data.pId){
+				pId = ref.child(data.pForm).push({data:data.pData}, function(error){
+					if(error){console.log(error);}else{return {parent:pId,child:cId};}
+				});
+			}else{
+				console.log("Failed to meet put criteria: "+data);
+			}
+			//if (typeof callback === "function") {
+    		//	callback();
+			//} else {console.log('Failed to run callback');}
 		}
 	};
 }])
-.controller("AppCtrl", ["Soil", "$firebaseAuth", function(Soil, $firebaseAuth){
+.controller("AppCtrl", ["$rootScope", "Soil", "$firebaseAuth", "Auth", function($rootScope, Soil, $firebaseAuth, Auth){
 	var ctrl = this;
-	var ref = new Firebase(Soil.url);
-    this.auth = $firebaseAuth(ref.child('users'));
-    this.auth.$onAuth(function(authData) {
+	$rootScope.auth = Auth;
+    Auth.$onAuth(function(authData) {
     	if(authData){
-			ctrl.authData = authData;
+			$rootScope.authData = authData;
 			console.log(authData);
-			var date = Date.now();
+			var date = Firebase.ServerValue.TIMESTAMP;
 			var dateID = date.toString();
-			Soil.put('lastactive', date, dateID, 'users', authData.google.displayName, authData.google.id);
+			Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.google.id});
     	}
     });
 }]);

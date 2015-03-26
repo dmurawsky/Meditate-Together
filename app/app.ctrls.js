@@ -3,9 +3,9 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 	var formCtrl = this;
 	this.saveData = function(title){
 		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
-		var date = Date.now();
+		var date = Firebase.ServerValue.TIMESTAMP;
 		var dateID = date.toString();
-		var newForm = Soil.put('createdtime', date, dateID, 'form', title, formId);
+		var newForm = Soil.put({cForm:'createdtime', cData:date, cId:dateID, pForm:'form', pData:title, pId:formId});
 		formCtrl.formTitle = '';
 	};
 	this.deleteForm = function(form){
