@@ -16,12 +16,12 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	});
 })
 .run(["$rootScope", "$location", function($rootScope, $location){
-	if(!$rootScope.authData.google.id && $location.path() != "/"){
+	if(!$rootScope.authData && $location.path() != "/"){
 		alert("You need to be authenticated to see this page!");
 		event.preventDefault();
 	}
 	$rootScope.$on("$locationChangeStart", function(event, next, current) {
-		if(!$rootScope.authData.google.id){
+		if(!$rootScope.authData){
 			alert("You need to be authenticated to see this page!");
 			event.preventDefault();
 		}
