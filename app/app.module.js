@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('app', ['firebase', 'ng-route'])
+var app = angular.module('app', ['firebase', 'ngRoute'])
 .config(function($routeProvider) {
 	$routeProvider.when('/:form', {
 		templateUrl: 'app/components/urlRouter.html',
