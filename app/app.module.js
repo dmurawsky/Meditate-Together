@@ -158,7 +158,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		resolve: {
 		// controller will not be loaded until $requireAuth resolves
 		// Auth refers to our $firebaseAuth wrapper in the example above
-			"formAuth": ["Auth", function(Auth) {
+			"currentAuth": ["Auth", function(Auth) {
 			// $requireAuth returns a promise so the resolve waits for it to complete
 			// If the promise is rejected, it will throw a $stateChangeError (see above)
 				return Auth.$requireAuth();
@@ -170,7 +170,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		resolve: {
 		// controller will not be loaded until $requireAuth resolves
 		// Auth refers to our $firebaseAuth wrapper in the example above
-			"dataAuth": ["Auth", function(Auth) {
+			"currentAuth": ["Auth", function(Auth) {
 			// $requireAuth returns a promise so the resolve waits for it to complete
 			// If the promise is rejected, it will throw a $stateChangeError (see above)
 				return Auth.$requireAuth();
@@ -182,7 +182,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		resolve: {
 		// controller will not be loaded until $requireAuth resolves
 		// Auth refers to our $firebaseAuth wrapper in the example above
-			"viewAuth": ["Auth", function(Auth) {
+			"currentAuth": ["Auth", function(Auth) {
 			// $requireAuth returns a promise so the resolve waits for it to complete
 			// If the promise is rejected, it will throw a $stateChangeError (see above)
 				return Auth.$requireAuth();
@@ -193,18 +193,18 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'HomeCtrl'
 	});
 })
-.controller("FormCtrl", ["$scope", "$routeParams", "formAuth", function($scope, $routeParams, formAuth){
+.controller("FormCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	console.log(formAuth)
-	if(formAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
+	console.log(currentAuth)
+	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
-.controller("DataCtrl", ["$scope", "$routeParams", "dataAuth", function($scope, $routeParams, dataAuth){
+.controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(dataAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/data.html';}
+	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/data.html';}
 }])
-.controller("ViewCtrl", ["$scope", "$routeParams", "viewAuth", function($scope, $routeParams, viewAuth){
+.controller("ViewCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(viewAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
+	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
 }])
 .factory('Soil', ['$firebaseObject', function ($firebaseObject){
 	var fburl = 'https://soil.firebaseio.com/';
