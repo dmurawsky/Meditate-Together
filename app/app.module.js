@@ -19,40 +19,15 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	$routeProvider.when('/:form', {
 		templateUrl: 'app/components/urlRouter.html',
 		controller: 'FormCtrl',
-		resolve: {
-		// controller will not be loaded until $requireAuth resolves
-		// Auth refers to our $firebaseAuth wrapper in the example above
-			"currentAuth": ["Auth", function(Auth) {
-				console.log("test");
-			// $requireAuth returns a promise so the resolve waits for it to complete
-			// If the promise is rejected, it will throw a $stateChangeError (see above)
-				return Auth.$requireAuth();
-			}]
-		}
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data', {
 		templateUrl: 'app/components/urlRouter.html',
 		controller: 'DataCtrl',
-		resolve: {
-		// controller will not be loaded until $requireAuth resolves
-		// Auth refers to our $firebaseAuth wrapper in the example above
-			"currentAuth": ["Auth", function(Auth) {
-			// $requireAuth returns a promise so the resolve waits for it to complete
-			// If the promise is rejected, it will throw a $stateChangeError (see above)
-				return Auth.$requireAuth();
-			}]
-		}
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data/:view', {
 		templateUrl: 'app/components/urlRouter.html',
 		controller: 'ViewCtrl',
-		resolve: {
-		// controller will not be loaded until $requireAuth resolves
-		// Auth refers to our $firebaseAuth wrapper in the example above
-			"currentAuth": ["Auth", function(Auth) {
-			// $requireAuth returns a promise so the resolve waits for it to complete
-			// If the promise is rejected, it will throw a $stateChangeError (see above)
-				return Auth.$requireAuth();
-			}]
-		}
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/', {
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
