@@ -39,8 +39,11 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	//Gets the form name from the url and loads the proper html and ctrl
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
-.controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
-	//Gets the form name from the url and loads the proper html and ctrl
+.controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", "Soil", function($scope, $routeParams, currentAuth, Soil){
+	this.setAccess = function(access){
+		var ref = new Firebase(Soil.url+"/"+$routeParams.form+"/"+$routeParams.data+"/public");
+		ref.set(access);
+	};
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/default.html';}
 }])
 .controller("ListCtrl", ["Soil", "$scope", "$routeParams", "currentAuth", function(Soil, $scope, $routeParams, currentAuth){
@@ -49,10 +52,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	$scope.list = Soil.curList($routeParams.conForm);
 }])
 .controller("ViewCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
-	//Gets the form name from the url and loads the proper html and ctrl
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
 }])
-.factory('Soil', ['$firebaseObject', function ($firebaseObject){
+.factory('Soil', ['$firebaseObject', '$location', function ($firebaseObject, $location){
 	var fburl = 'https://soil.firebaseio.com/forms';
 	var ref = new Firebase(fburl);
 	var params = $location.path().split("/");
