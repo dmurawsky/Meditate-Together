@@ -86,8 +86,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			if(access && link){
 				ref.child(link+"/public").set(access);
 			}else if(link){
-				ref.child(link+"/public").once('value', function(snap){
-					return snap.val();
+				ref.child(link).once('value', function(snap){
+					var snapVal = snap.val();
+					return snapVal.public;
 				});
 			}else{
 				console.log('error running Soil.access(link, access)')
