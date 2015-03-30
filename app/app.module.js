@@ -2,31 +2,33 @@
 var app = angular.module('app', ['firebase', 'ngRoute'])
 .run(["$rootScope", "$location", function($rootScope, $location) {
 	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
-				console.log("test");
-				console.log(error);
-		// We can catch the error thrown when the $requireAuth promise is rejected
-		// and redirect the user back to the home page
 		if (error === "AUTH_REQUIRED") {
 			$location.path("/");
 		}
 	});
 }])
-.factory("Auth", ["Soil", "$firebaseAuth", function(Soil, $firebaseAuth){
-	var ref = new Firebase(Soil.url);
+.factory("Auth", ["$firebaseAuth", function($firebaseAuth){
+	var ref = new Firebase("https://soil.firebaseio.com/");
 	return $firebaseAuth(ref);
 }])
 .config(function($routeProvider) {
 	$routeProvider.when('/:form', {
-		templateUrl: 'app/components/urlRouter.html',
+		templateUrl: 'app/components/formRouter.html',
 		controller: 'FormCtrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data', {
-		templateUrl: 'app/components/urlRouter.html',
+		templateUrl: 'app/components/dataRouter.html',
 		controller: 'DataCtrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
+	}).when('/:form/:data/list/:conForm', {
+		templateUrl: 'app/components/list.html',
+		controller: 'ListCtrl',
+		controllerAs: 'ctrl',
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data/:view', {
-		templateUrl: 'app/components/urlRouter.html',
+		templateUrl: 'app/components/viewRouter.html',
 		controller: 'ViewCtrl',
+		controllerAs: 'ctrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/', {
 		templateUrl: 'app/components/home.html',
@@ -35,89 +37,77 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 })
 .controller("FormCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	console.log(currentAuth)
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
 .controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
-	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/data.html';}
+	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/default.html';}
+}])
+.controller("ListCtrl", ["Soil", "$scope", "$routeParams", "currentAuth", function(Soil, $scope, $routeParams, currentAuth){
+	//loads a list of connections under the selected form, selected by $routeParams.conform
+	$scope.title = Soil.data("form/"+$routeParams.conForm);
+	$scope.list = Soil.curList($routeParams.conForm);
 }])
 .controller("ViewCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
 	//Gets the form name from the url and loads the proper html and ctrl
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
 }])
 .factory('Soil', ['$firebaseObject', function ($firebaseObject){
-	var fburl = 'https://soil.firebaseio.com/';
+	var fburl = 'https://soil.firebaseio.com/forms';
 	var ref = new Firebase(fburl);
+	var params = $location.path().split("/");
 	return {
 		url: fburl,
-		path: function(){
-			var params = $location.path().split("/");
-			console.log(params);
-			return {form:params[1], data:params[2], view:params[3]};
+		//returns the path to the current data of the current form determined by the url
+		curData: function(){
+			var link = params[1]+"/"+params[2];
+			var data = $firebaseObject(new Firebase(fburl+"/"+link));
+			data.$loaded().then(function(){
+				return {"link":link, "data":data.data};
+			});
 		},
-		access: function(data){
-			//If dataId and parentId are given, then we're just updating 
-			//So go in and update parent data and child data
-			var cId = childId;
-			var pId = parentId;
-			var errorCb = function(error){if(error){console.log(error);}}
-			if(childForm && childData && childId && parentForm && parentData && parentId){
-				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
-				ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
-				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
-				ref.child(childForm+'/'+childId+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId}, errorCb);
-				return {parent:pId,child:cId};
-			}else if(childForm && childData && childId && parentForm && parentData && !parentId){
-				pId = ref.child(parentForm).push({data:parentData}, function(error){
-					if(error){console.log(error);}else{
-						ref.child(parentForm+'/'+pId.key()+'/'+childForm+'/'+childId).update({link:childForm+'/'+childId}, errorCb);
-						ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
-						ref.child(childForm+'/'+childId+'/'+parentForm+'/'+pId.key()).update({link:parentForm+'/'+pId.key()}, errorCb);
-						return {parent:pId,child:cId};
-					}
+		curList: function(conForm){
+			var list = {};
+			var cons = $firebaseObject(ref.child(params[1] +"/"+ params[2] +"/connections/"+ conForm));
+			cons.$loaded().then(function(){
+				angular.forEach(cons, function(value, key) {
+					var link = conForm+"/"+key;
+					var conData = $firebaseObject(new Firebase(fburl+"/"+link));
+					conData.$loaded().then(function(){
+		  				list[key] = {"link":link, "data": conData.data};
+					});
 				});
-			}else if(childForm && childData && !childId && parentForm && parentData && parentId){
-				cId = ref.child(childForm).push({data:childData}, function(error){
-					if(error){console.log(error);}else{
-						ref.child(childForm+'/'+cId.key()+'/'+parentForm+'/'+parentId).update({link:parentForm+'/'+parentId}, errorCb);
-						ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
-						ref.child(parentForm+'/'+parentId+'/'+childForm+'/'+cId.key()).update({link:childForm+'/'+cId.key()}, errorCb);
-						return {parent:pId,child:cId};
-					}
+				return list;
+			});
+		},
+		//returns the path to the current data of the current form determined by the url
+		data: function(link){
+			var data = $firebaseObject(new Firebase(fburl+"/"+link));
+			data.$loaded().then(function(){
+				return data.data;
+			});
+		},
+		list: function(conFormLink){
+			var list = {};
+			var cons = $firebaseObject(new Firebase(fburl+"/"+conFormLink));
+			cons.$loaded().then(function(){
+				angular.forEach(cons, function(value, key) {
+					var link = conForm+"/"+key;
+					var conData = $firebaseObject(new Firebase(fburl+"/"+link));
+					conData.$loaded().then(function(){
+		  				list[key] = {"link":link, "data": conData.data};
+					});
 				});
-			}else if(childForm && childData && !childId && parentForm && parentData && !parentId){
-				cId = ref.child(childForm).push({data:childData}, function(cError){
-					if(cError){console.log(cError);}else{
-						pId = ref.child(parentForm).push({data:parentData}, function(pError){
-							if(pError){console.log(pError);}else{
-								ref.child(parentForm+'/'+pId.key()+'/'+childForm+'/'+cId.key()).update({link:childForm+'/'+cId.key()}, errorCb);
-								ref.child(childForm+'/'+cId.key()+'/'+parentForm+'/'+pId.key()).update({link:parentForm+'/'+pId.key()}, errorCb);
-								return {parent:pId,child:cId};
-							}
-						});
-					}
-				});
-			}else if(childForm && childData && childId && !parentForm && !parentData && !parentId){
-				ref.child(childForm+'/'+childId).update({data:childData}, errorCb);
-				return {parent:pId,child:cId};
-			}else if(!childForm && !childData && !childId && parentForm && parentData && parentId){
-				ref.child(parentForm+'/'+parentId).update({data:parentData}, errorCb);
-				return {parent:pId,child:cId};
-			}else if(childForm && childData && !childId && !parentForm && !parentData && !parentId){
-				cId = ref.child(childForm).push({data:childData}, function(error){
-					if(error){console.log(error);}else{return {parent:pId,child:cId};}
-				});
-			}else if(!childForm && !childData && !childId && parentForm && parentData && !parentId){
-				pId = ref.child(parentForm).push({data:parentData}, function(error){
-					if(error){console.log(error);}else{return {parent:pId,child:cId};}
-				});
-			}else{
-				console.log("Failed to meet access criteria.");
-			}
-			//if (typeof callback === "function") {
-    		//	callback();
-			//} else {console.log('Failed to run callback');}
+				return list;
+			});
+		},
+		//allows the dev to request a list of connections under a paticular form (e.g. a list of messages, a list of dates, a list of todos, etc.)
+		cons: function(conForm){
+			return fburl +"/"+ params[1] +"/"+ params[2] +"/connections/"+ conForm;
+		},
+		path: function(){
+			console.log(params);
+			return {form:params[1], data:params[2], view:params[3], conForm:params[4]};
 		},
 		put: function(data){
 			//If dataId and data.pId are given, then we're just updating 
@@ -178,9 +168,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			}else{
 				console.log("Failed to meet put criteria: "+data);
 			}
-			//if (typeof callback === "function") {
-    		//	callback();
-			//} else {console.log('Failed to run callback');}
 		}
 	};
 }])
