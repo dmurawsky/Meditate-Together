@@ -40,9 +40,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
 .controller("DataCtrl", ["$scope", "$routeParams", "$firebaseObject", "currentAuth", "Soil", function($scope, $routeParams, $firebaseObject, currentAuth, Soil){
-	var access = $firebaseObject(new Firebase(Soil.url+"/"+$routeParams.form+"/"+$routeParams.data+"/public"));
+	var access = $firebaseObject(new Firebase(Soil.url+"/"+$routeParams.form+"/"+$routeParams.data));
 	access.$bindTo($scope, "access");
-	console.log($scope.access)
+	console.log($scope.access);
 	$scope.setAccess = function(access){
 		Soil.access($routeParams.form+"/"+$routeParams.data, access);
 	};
