@@ -42,7 +42,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 .controller("DataCtrl", ["$scope", "$routeParams", "$firebaseObject", "currentAuth", "Soil", function($scope, $routeParams, $firebaseObject, currentAuth, Soil){
 	var access = $firebaseObject(new Firebase(Soil.url+"/"+$routeParams.form+"/"+$routeParams.data));
 	access.$bindTo($scope, "access");
-	console.log($scope.access);
 	$scope.setAccess = function(access){
 		Soil.access($routeParams.form+"/"+$routeParams.data, access);
 	};
@@ -86,7 +85,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		},
 		access: function(link, access){
 			if(link){
-				console.log(access, link);
 				ref.child(link+"/public").set(access);
 			}else{
 				console.log('error running Soil.access(link, access)')
