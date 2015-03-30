@@ -122,33 +122,33 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var pId = data.pId;
 			var errorCb = function(error){if(error){console.log(error);}}
 			if(data.cForm && data.cData && data.cId && data.pForm && data.pData && data.pId){
-				ref.child(data.pForm+'/'+data.pId).update({data:data.pData,owner:$rootScope.authData.uid,public:true}, errorCb);
+				ref.child(data.pForm+'/'+data.pId).update({data:data.pData,owner:$rootScope.authData.uid,public:data.public}, errorCb);
 				ref.child(data.pForm+'/'+data.pId+'/connections/'+data.cForm+'/'+data.cId).update({link:data.cForm+'/'+data.cId}, errorCb);
-				ref.child(data.cForm+'/'+data.cId).update({data:data.cData,owner:$rootScope.authData.uid,public:true}, errorCb);
+				ref.child(data.cForm+'/'+data.cId).update({data:data.cData,owner:$rootScope.authData.uid,public:data.public}, errorCb);
 				ref.child(data.cForm+'/'+data.cId+'/connections/'+data.pForm+'/'+data.pId).update({link:data.pForm+'/'+data.pId}, errorCb);
 				return {parent:pId,child:cId};
 			}else if(data.cForm && data.cData && data.cId && data.pForm && data.pData && !data.pId){
-				pId = ref.child(data.pForm).push({data:data.pData,owner:$rootScope.authData.uid,public:true}, function(error){
+				pId = ref.child(data.pForm).push({data:data.pData,owner:$rootScope.authData.uid,public:data.public}, function(error){
 					if(error){console.log(error);}else{
 						ref.child(data.pForm+'/'+pId.key()+'/connections/'+data.cForm+'/'+data.cId).update({link:data.cForm+'/'+data.cId}, errorCb);
-						ref.child(data.cForm+'/'+data.cId).update({data:data.cData,owner:$rootScope.authData.uid,public:true}, errorCb);
+						ref.child(data.cForm+'/'+data.cId).update({data:data.cData,owner:$rootScope.authData.uid,public:data.public}, errorCb);
 						ref.child(data.cForm+'/'+data.cId+'/connections/'+data.pForm+'/'+pId.key()).update({link:data.pForm+'/'+pId.key()}, errorCb);
 						return {parent:pId,child:cId};
 					}
 				});
 			}else if(data.cForm && data.cData && !data.cId && data.pForm && data.pData && data.pId){
-				cId = ref.child(data.cForm).push({data:data.cData,owner:$rootScope.authData.uid,public:true}, function(error){
+				cId = ref.child(data.cForm).push({data:data.cData,owner:$rootScope.authData.uid,public:data.public}, function(error){
 					if(error){console.log(error);}else{
 						ref.child(data.cForm+'/'+cId.key()+'/connections/'+data.pForm+'/'+data.pId).update({link:data.pForm+'/'+data.pId}, errorCb);
-						ref.child(data.pForm+'/'+data.pId).update({data:data.pData,owner:$rootScope.authData.uid,public:true}, errorCb);
+						ref.child(data.pForm+'/'+data.pId).update({data:data.pData,owner:$rootScope.authData.uid,public:data.public}, errorCb);
 						ref.child(data.pForm+'/'+data.pId+'/connections/'+data.cForm+'/'+cId.key()).update({link:data.cForm+'/'+cId.key()}, errorCb);
 						return {parent:pId,child:cId};
 					}
 				});
 			}else if(data.cForm && data.cData && !data.cId && data.pForm && data.pData && !data.pId){
-				cId = ref.child(data.cForm).push({data:data.cData,owner:$rootScope.authData.uid,public:true}, function(cError){
+				cId = ref.child(data.cForm).push({data:data.cData,owner:$rootScope.authData.uid,public:data.public}, function(cError){
 					if(cError){console.log(cError);}else{
-						pId = ref.child(data.pForm).push({data:data.pData,owner:$rootScope.authData.uid,public:true}, function(pError){
+						pId = ref.child(data.pForm).push({data:data.pData,owner:$rootScope.authData.uid,public:data.public}, function(pError){
 							if(pError){console.log(pError);}else{
 								ref.child(data.pForm+'/'+pId.key()+'/connections/'+data.cForm+'/'+cId.key()).update({link:data.cForm+'/'+cId.key()}, errorCb);
 								ref.child(data.cForm+'/'+cId.key()+'/connections/'+data.pForm+'/'+pId.key()).update({link:data.pForm+'/'+pId.key()}, errorCb);
@@ -158,17 +158,17 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 					}
 				});
 			}else if(data.cForm && data.cData && data.cId && !data.pForm && !data.pData && !data.pId){
-				ref.child(data.cForm+'/'+data.cId).update({data:data.cData,owner:$rootScope.authData.uid,public:true}, errorCb);
+				ref.child(data.cForm+'/'+data.cId).update({data:data.cData,owner:$rootScope.authData.uid,public:data.public}, errorCb);
 				return {parent:pId,child:cId};
 			}else if(!data.cForm && !data.cData && !data.cId && data.pForm && data.pData && data.pId){
-				ref.child(data.pForm+'/'+data.pId).update({data:data.pData,owner:$rootScope.authData.uid,public:true}, errorCb);
+				ref.child(data.pForm+'/'+data.pId).update({data:data.pData,owner:$rootScope.authData.uid,public:data.public}, errorCb);
 				return {parent:pId,child:cId};
 			}else if(data.cForm && data.cData && !data.cId && !data.pForm && !data.pData && !data.pId){
-				cId = ref.child(data.cForm).push({data:data.cData,owner:$rootScope.authData.uid,public:true}, function(error){
+				cId = ref.child(data.cForm).push({data:data.cData,owner:$rootScope.authData.uid,public:data.public}, function(error){
 					if(error){console.log(error);}else{return {parent:pId,child:cId};}
 				});
 			}else if(!data.cForm && !data.cData && !data.cId && data.pForm && data.pData && !data.pId){
-				pId = ref.child(data.pForm).push({data:data.pData,owner:$rootScope.authData.uid,public:true}, function(error){
+				pId = ref.child(data.pForm).push({data:data.pData,owner:$rootScope.authData.uid,public:data.public}, function(error){
 					if(error){console.log(error);}else{return {parent:pId,child:cId};}
 				});
 			}else{
