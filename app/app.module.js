@@ -41,6 +41,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }])
 .controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", "Soil", function($scope, $routeParams, currentAuth, Soil){
 	this.setAccess = function(access){
+		console.log(access);
 		var ref = new Firebase(Soil.url+"/"+$routeParams.form+"/"+$routeParams.data+"/public");
 		ref.set(access);
 	};
