@@ -40,7 +40,8 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/form.html';}else{console.log("formAuth Failed")}
 }])
 .controller("DataCtrl", ["$scope", "$routeParams", "currentAuth", "Soil", function($scope, $routeParams, currentAuth, Soil){
-	$scope.access = Soil.access($routeParams.form+"/"+$routeParams.data);
+	var access = $firebaseObject(new Firebase(Soil.url+"/"+$routeParams.form+"/"+$routeParams.data+"/public"));
+	access.$bindTo($scope, "access");
 	console.log($scope.access)
 	$scope.setAccess = function(access){
 		Soil.access($routeParams.form+"/"+$routeParams.data, access);
@@ -84,15 +85,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			});
 		},
 		access: function(link, access){
-			if(access && link){
+			if(link){
 				console.log(access, link);
 				ref.child(link+"/public").set(access);
-			}else if(link){
-				console.log(link);
-				ref.child(link).once('value', function(snap){
-					var snapVal = snap.val();
-					return snapVal.public;
-				});
 			}else{
 				console.log('error running Soil.access(link, access)')
 			}
