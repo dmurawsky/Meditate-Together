@@ -182,7 +182,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var date = Math.round(Date.now() / 1000);
 			date.substring;
 			var dateID = date.toString();
-			console.log(authData.google.id);
 			Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
     	}
     });

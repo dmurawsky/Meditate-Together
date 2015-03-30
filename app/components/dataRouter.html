@@ -1,6 +1,6 @@
-<div id="accessButton" ng-click="ctrl.setAccess(ctrl.access)">
+<div id="accessButton">
 	<div class="roundedOne">
-		<input type="checkbox" value="None" ng-model="ctrl.access" id="roundedOne" name="check" />
+		<input type="checkbox" value="None" ng-model="ctrl.access" id="roundedOne" name="check" ng-click="ctrl.setAccess(ctrl.access)" />
 		<label for="roundedOne"></label>
 	</div>
 </div>
