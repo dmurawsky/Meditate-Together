@@ -6,6 +6,7 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 		var date = Math.round(Date.now() / 1000);
 		var dateID = date.toString();
 		var newForm = Soil.put({cForm:'createdtime', cData:date, cId:dateID, pForm:'form', pData:title, pId:formId});
+		Soil.access("form/"+formId, true);
 		formCtrl.formTitle = '';
 	};
 	this.deleteForm = function(form){
@@ -14,17 +15,6 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 			ref.child("form/"+form).remove();
 		}
 	};
-	var obj = $firebaseObject(ref.child('form'));
-	// The $loaded() promise signifies that the initial state has been downloaded
-	obj.$loaded().then(function() {
-		formCtrl.messages = Soil.get(obj['message']);
-		angular.forEach(obj, function(value, key) {
-			angular.forEach(value.createdtime, function(timeValue, timeKey){
-				obj[key].time = Number(timeKey);
-			});
-		});
-	});
-	obj.$bindTo($scope, "forms");
 }])
 .controller("formData", ['Soil', function(Soil){
 }])
