@@ -83,6 +83,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			});
 		},
 		access: function(link, access){
+			console.log(link, access)
 			if(access && link){
 				ref.child(link+"/public").set(access);
 			}else if(link){
