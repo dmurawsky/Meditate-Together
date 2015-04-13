@@ -194,3 +194,5 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
     	}
     });
 }]);
+//so when 70k boots up you'll be presented with a very quick description and large photos of what we're about and the three sign in buttons. 
+//Then when you sign in the screen wont change but you'll have access to the homepage
