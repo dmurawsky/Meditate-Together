@@ -21,7 +21,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'DataCtrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data/list/:conForm', {
-		templateUrl: 'app/components/list.html',
+		templateUrl: 'app/compone nts/list.html',
 		controller: 'ListCtrl',
 		controllerAs: 'ctrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
