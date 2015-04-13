@@ -88,7 +88,7 @@
   opacity: 1;
 }
 .navbar-default {
-  background-color: #72a24e;
+  background-color: #72a24e!important;
   border-color: #54862e;
 }
 .navbar-default .navbar-brand {
