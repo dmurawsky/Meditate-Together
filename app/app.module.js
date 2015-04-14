@@ -8,27 +8,23 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	});
 }])
 .factory("Auth", ["$firebaseAuth", function($firebaseAuth){
-	var ref = new Firebase("https://soil.firebaseio.com/");
+	var ref = new Firebase("https://70k.firebaseio.com/");
 	return $firebaseAuth(ref);
 }])
 .config(function($routeProvider) {
-	$routeProvider.when('/:form', {
+	$routeProvider.when('/people', {
+		templateUrl: 'app/components/practicality.html',
+		controller: 'PracticalCtrl'
+	}).when('/practicality', {
+		templateUrl: 'app/components/people.html',
+		controller: 'PeopleCtrl'
+	}).when('/:form', {
 		templateUrl: 'app/components/formRouter.html',
 		controller: 'FormCtrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/:form/:data', {
 		templateUrl: 'app/components/dataRouter.html',
 		controller: 'DataCtrl',
-		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
-	}).when('/:form/:data/list/:conForm', {
-		templateUrl: 'app/compone nts/list.html',
-		controller: 'ListCtrl',
-		controllerAs: 'ctrl',
-		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
-	}).when('/:form/:data/:view', {
-		templateUrl: 'app/components/viewRouter.html',
-		controller: 'ViewCtrl',
-		controllerAs: 'ctrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/', {
 		templateUrl: 'app/components/home.html',
@@ -45,18 +41,10 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	$scope.setAccess = function(access){
 		Soil.access($routeParams.form+"/"+$routeParams.data, access);
 	};
-	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/default.html';}
-}])
-.controller("ListCtrl", ["Soil", "$scope", "$routeParams", "currentAuth", function(Soil, $scope, $routeParams, currentAuth){
-	//loads a list of connections under the selected form, selected by $routeParams.conform
-	$scope.title = Soil.data("form/"+$routeParams.conForm);
-	$scope.list = Soil.curList($routeParams.conForm);
-}])
-.controller("ViewCtrl", ["$scope", "$routeParams", "currentAuth", function($scope, $routeParams, currentAuth){
-	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/'+$routeParams.view+'.html';}
+	if(currentAuth){$scope.templateUrl = 'app/components/'+$routeParams.form+'/default.html';}else{console.log("dataAuth Failed")}
 }])
 .factory('Soil', ['$firebaseObject', '$location', '$rootScope', function ($firebaseObject, $location, $rootScope){
-	var fburl = 'https://soil.firebaseio.com/forms';
+	var fburl = 'https://70k.firebaseio.com/forms';
 	var ref = new Firebase(fburl);
 	var params = $location.path().split("/");
 	return {

@@ -25,8 +25,12 @@
 	                <li><a href="#/practicality">practicality</a>
 	                </li>
 	            </ul>
+	            <ul class="pull-right">
+	            	<li>
+	            		<img ng-cloak ng-show="authData.google" ng-click="auth.$unauth()" ng-src="{{authData.google.cachedUserProfile.picture}}?sz=50">
+	            	</li>
+	            </ul>
 	        </div>
-	        <div id="logo">test</div>
 	    </div>
 	</nav>
 	<div id="wrapper" ng-view></div>

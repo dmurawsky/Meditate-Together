@@ -1,4 +1,4 @@
-app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, $firebaseObject, $scope){
+app.controller("formForm", ['Soil', '$scope', function(Soil, $scope){
 	var ref = new Firebase(Soil.url);
 	var formCtrl = this;
 	this.saveData = function(title){
@@ -17,6 +17,10 @@ app.controller("formForm", ['Soil', '$firebaseObject', '$scope', function(Soil, 
 	};
 }])
 .controller("formData", ['Soil', function(Soil){
+}])
+.controller("PeopleCtrl", ['Soil', function(Soil){
+}])
+.controller("PracticalCtrl", ['Soil', function(Soil){
 }])
 .controller("HomeCtrl", ["Soil", function(Soil){
 }]);
