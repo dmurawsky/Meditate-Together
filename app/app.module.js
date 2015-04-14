@@ -179,6 +179,8 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			date.substring;
 			var dateID = date.toString();
 			Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
+    	}else{
+    		$rootScope.authData = false;
     	}
     });
 }]);
