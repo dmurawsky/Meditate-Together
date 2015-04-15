@@ -198,7 +198,13 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var date = Math.round(Date.now() / 1000);
 			date.substring;
 			var dateID = date.toString();
-			Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
+			if(authData.google){
+				Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
+			}else if(authData.twitter){
+				Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.twitter.displayName, pId:authData.uid});
+			}else if(authData.facebook){
+				Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.facebook.displayName, pId:authData.uid});
+			}
     	}else{
     		$location.path("/");
     		$rootScope.authData = false;

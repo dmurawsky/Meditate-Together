@@ -30,7 +30,9 @@
 	            	<li ng-hide="authData"><button type="button" class="btn btn-sm btn-default navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
 	            	<li ng-show="authData"><button type="button" class="btn btn-sm btn-default navbar-btn" ng-click="auth.$unauth()">Sign Out</button></li>
 	            	<li>
-	            		<img class="profileImg" ng-cloak ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}?sz=50">
+	            		<img class="profileImg" ng-cloak ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
+	            		<img class="profileImg" ng-cloak ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
+	            		<img class="profileImg" ng-cloak ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
 	            	</li>
 	            </ul>
 	        </div>
