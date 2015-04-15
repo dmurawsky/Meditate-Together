@@ -14,7 +14,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 .config(function($routeProvider) {
 	$routeProvider.when('/people', {
 		templateUrl: 'app/components/people.html',
-		controller: 'PeopleCtrl'
+		controller: 'PeopleCtrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/practicality', {
 		templateUrl: 'app/components/practicality.html',
