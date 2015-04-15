@@ -13,11 +13,12 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }])
 .config(function($routeProvider) {
 	$routeProvider.when('/people', {
-		templateUrl: 'app/components/practicality.html',
-		controller: 'PracticalCtrl'
-	}).when('/practicality', {
 		templateUrl: 'app/components/people.html',
 		controller: 'PeopleCtrl'
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
+	}).when('/practicality', {
+		templateUrl: 'app/components/practicality.html',
+		controller: 'PracticalCtrl',
 	}).when('/:form', {
 		templateUrl: 'app/components/formRouter.html',
 		controller: 'FormCtrl',
@@ -169,7 +170,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	};
 }])
-.controller("AppCtrl", ["$rootScope", "Soil", "$firebaseAuth", "Auth", function($rootScope, Soil, $firebaseAuth, Auth){
+.controller("AppCtrl", ["$location", "$rootScope", "Soil", "$firebaseAuth", "Auth", function($location, $rootScope, Soil, $firebaseAuth, Auth){
 	var ctrl = this;
 	$rootScope.auth = Auth;
     Auth.$onAuth(function(authData) {
@@ -180,6 +181,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var dateID = date.toString();
 			Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
     	}else{
+    		$location.path("/");
     		$rootScope.authData = false;
     	}
     });
