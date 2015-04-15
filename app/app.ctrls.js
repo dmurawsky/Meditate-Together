@@ -1,6 +1,9 @@
 app.controller("practiceListForm", ['Soil', '$scope', function(Soil, $scope){
 
 }])
+.controller("placeListForm", ['Soil', '$scope', function(Soil, $scope){
+
+}])
 .controller("practiceForm", ['Soil', '$scope', function(Soil, $scope){
 	var ref = new Firebase(Soil.url);
 	var formCtrl = this;
