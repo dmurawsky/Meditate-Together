@@ -44,7 +44,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	}).when('/', {
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
-	}).otherwhise('/', {
+	}).otherwise('/', {
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
 	});
