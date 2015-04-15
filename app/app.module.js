@@ -7,18 +7,32 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		}
 	});
 }])
+.run(['$rootScope', function($rootScope) {
+	$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+		if (current.hasOwnProperty('$$route')) {
+			$rootScope.title = current.$$route.title;
+		}
+	});
+}])
 .factory("Auth", ["$firebaseAuth", function($firebaseAuth){
 	var ref = new Firebase("https://70k.firebaseio.com/");
 	return $firebaseAuth(ref);
 }])
-.config(function($routeProvider) {
+.config(function($routeProvider){
 	$routeProvider.when('/people', {
 		templateUrl: 'app/components/people.html',
 		controller: 'PeopleCtrl',
+		title: 'People',
+		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
+	}).when('/events', {
+		templateUrl: 'app/components/events.html',
+		controller: 'EventsCtrl',
+		title: 'Events',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/practicality', {
 		templateUrl: 'app/components/practicality.html',
-		controller: 'PracticalCtrl',
+		controller: 'PracticalityCtrl',
+		title: 'Practicality'
 	}).when('/:form', {
 		templateUrl: 'app/components/formRouter.html',
 		controller: 'FormCtrl',
@@ -28,6 +42,9 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'DataCtrl',
 		resolve: {"currentAuth": ["Auth", function(Auth) {return Auth.$requireAuth();}]}
 	}).when('/', {
+		templateUrl: 'app/components/home.html',
+		controller: 'HomeCtrl'
+	}).otherwhise('/', {
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
 	});
