@@ -175,6 +175,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	$rootScope.auth = Auth;
     Auth.$onAuth(function(authData) {
     	if(authData){
+    		console.log(authData);
     		$location.path("/");
 			$rootScope.authData = authData;
 			var date = Math.round(Date.now() / 1000);
