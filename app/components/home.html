@@ -1,18 +1,12 @@
 <div class="container-fluid">
-	<div class="row" ng-hide="authData">
-		<div class="col-md-4"></div>
-		<div class="col-md-4" style="text-align:center!important;">
-			<a href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i> Sign In with Google</a><br><br>
-			<a href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
-			<a href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
-		</div>
-		<div class="col-md-4"></div>
-	</div>
 	<div class="row" ng-show="authData">
+		<div class="col-md-12"><h1>Dashboard</h1></div>
+	</div>
+	<div class="row" ng-hide="authData">
 		<div class="col-md-12"><h1>70k project</h1></div>
 		<img src=""><!-- AN IMAGE OF A MEDITATING WORLD OR A WORLD OF LIGHT OR SOMETHING -->
 	</div>
-	<div class="row" ng-show="authData">
+	<div class="row" ng-hide="authData">
 		<div class="col-md-3">
 			<h2>people</h2>
 			<img src=""><!-- AN IMAGE OF PEOPLE -->
