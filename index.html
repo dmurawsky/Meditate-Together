@@ -27,8 +27,8 @@
 	                </li>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	            	<li ng-hide="authData"><button type="button" class="btn btn-sm btn-default navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
-	            	<li ng-show="authData"><button type="button" class="btn btn-sm btn-default navbar-btn" ng-click="auth.$unauth()">Sign Out</button></li>
+	            	<li ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
+	            	<li ng-show="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" ng-click="auth.$unauth()">Sign Out</button></li>
 	            	<li>
 	            		<img class="profileImg" ng-cloak ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
 	            		<img class="profileImg" ng-cloak ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
@@ -44,15 +44,12 @@
 			<div class="modal-content">
 				</form><div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Login</h4>
+					<h4 class="modal-title">Sign In</h4>
 				</div>
 				<div class="modal-body">
 					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i> Sign In with Google</a><br><br>
 					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
 					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
