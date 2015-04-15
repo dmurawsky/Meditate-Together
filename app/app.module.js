@@ -192,6 +192,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	$rootScope.auth = Auth;
     Auth.$onAuth(function(authData) {
     	if(authData){
+    		$('#loginModal').modal('hide');
     		console.log(authData);
     		$location.path("/");
 			$rootScope.authData = authData;
