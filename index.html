@@ -17,22 +17,27 @@
 			</div>
 	        <div class="collapse navbar-collapse navbar-menubuilder">
 	            <ul class="nav navbar-nav navbar-left">
-	                <li><a href="#/people">people</a>
+	                <li><a href="#/people">People</a>
 	                </li>
-	                <li><a href="#/place-list">places</a>
+	                <li><a href="#/place-list">Places</a>
 	                </li>
-	                <li><a href="#/practice-list">practices</a>
+	                <li><a href="#/practice-list">Practices</a>
 	                </li>
-	                <li><a href="#/practicality">practicality</a>
+	                <li><a href="#/events">Events</a>
 	                </li>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	            	<li ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
-	            	<li ng-show="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" ng-click="auth.$unauth()">Sign Out</button></li>
-	            	<li>
-	            		<img class="profileImg" ng-cloak ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
-	            		<img class="profileImg" ng-cloak ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
-	            		<img class="profileImg" ng-cloak ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
+	            	<li ng-cloak ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
+	            	<li ng-cloak class="dropdown open" ng-show="authData">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a ng-click="auth.$unauth()" href>Sign Out</a></li>
+						</ul>
+					</li>
+	            	<li ng-cloak>
+	            		<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
+	            		<img class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
+	            		<img class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
 	            	</li>
 	            </ul>
 	        </div>
