@@ -188,7 +188,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	};
 }])
 .controller("AppCtrl", ["$location", "$rootScope", "Soil", "$firebaseAuth", "Auth", function($location, $rootScope, Soil, $firebaseAuth, Auth){
-	$rootScope.practiceForm = $location.path === '/practice-list';
+	$rootScope.practiceForm = $location.path() === '/practice-list';
 	var ctrl = this;
 	$rootScope.auth = Auth;
     Auth.$onAuth(function(authData) {
