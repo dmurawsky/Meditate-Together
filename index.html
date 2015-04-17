@@ -27,8 +27,9 @@
 	                </li>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
+	            	<li ng-cloak ng-show="practiceForm"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#practiceForm">New Practice</button></li>
 	            	<li ng-cloak ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
-	            	<li ng-cloak class="dropdown open" ng-show="authData">
+	            	<li ng-cloak class="dropdown" ng-show="authData">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a ng-click="auth.$unauth()" href>Sign Out</a></li>
