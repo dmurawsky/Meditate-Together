@@ -1,5 +1,19 @@
+body{
+  padding-top: 70px;
+}
 .navbar-brand{
 	margin-left: 0;
+}
+.navbar-btn.btn-xs {
+  margin: 14px!important;
+}
+.profileImg{
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin:5px;
 }
 @media (min-width: 768px) {
 	.navbar .navbar-nav {
