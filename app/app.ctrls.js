@@ -1,32 +1,10 @@
-app.controller("practiceListForm", ['Soil', '$scope', function(Soil, $scope){
-
+app.controller("HamsasCtrl", ['HYS', function(Soil){
 }])
-.controller("placeListForm", ['Soil', '$scope', function(Soil, $scope){
-
+.controller("HamsaCtrl", ['HYS', function(Soil){
 }])
-.controller("practiceForm", ['Soil', '$scope', function(Soil, $scope){
-	var ref = new Firebase(Soil.url);
-	var formCtrl = this;
-	this.saveData = function(title){
-		var formId = title.replace(/[^a-z0-9]/gi, '').toLowerCase();
-		var date = Math.round(Date.now() / 1000);
-		var dateID = date.toString();
-		var newForm = Soil.put({cForm:'createdtime', cData:date, cId:dateID, pForm:'form', pData:title, pId:formId});
-		Soil.access("form/"+formId, true);
-		formCtrl.formTitle = '';
-	};
-	this.deleteForm = function(form){
-		if (confirm("Are you sure you want to delete "+form+"?")){
-			ref.child(form).remove();
-			ref.child("form/"+form).remove();
-		}
-	};
+.controller("MeditationsCtrl", ['HYS', function(Soil){
 }])
-.controller("formData", ['Soil', function(Soil){
+.controller("GroupsCtrl", ['HYS', function(Soil){
 }])
-.controller("PeopleCtrl", ['Soil', function(Soil){
-}])
-.controller("PracticalCtrl", ['Soil', function(Soil){
-}])
-.controller("HomeCtrl", ["Soil", function(Soil){
+.controller("HomeCtrl", ["HYS", function(Soil){
 }]);

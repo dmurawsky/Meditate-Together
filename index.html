@@ -1,5 +1,4 @@
-<!doctype HTML>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" class="ng-scope">
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -7,62 +6,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title ng-bind="title +' - 70k'"> - 70k</title>
 </head>
-<body ng-controller="AppCtrl as appCtrl">
+<body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 	            </button>
-				<a class="navbar-brand" href="#/">70k</a>
 			</div>
 	        <div class="collapse navbar-collapse navbar-menubuilder">
-	            <ul class="nav navbar-nav navbar-left">
-	                <li><a href="#/people">People</a>
-	                </li>
-	                <li><a href="#/place-list">Places</a>
-	                </li>
-	                <li><a href="#/practice-list">Practices</a>
-	                </li>
-	                <li><a href="#/events">Events</a>
-	                </li>
+	            <ul class="nav navbar-nav">
+	                <li><a href="#/people">Who's Meditating</a></li>
+          			<li><a class="navbar-brand" href="#">Community Humanity</a></li>
+	                <li><a href="#/place-list">Group Meditations</a></li>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	            	<li ng-cloak ng-show="practiceForm"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#practiceForm">New Practice</button></li>
-	            	<li ng-cloak ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
-	            	<li ng-cloak class="dropdown" ng-show="authData">
+	            	<li ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
+	            	<li class="dropdown ng-hide" ng-show="authData">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a ng-click="auth.$unauth()" href>Sign Out</a></li>
+							<li><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
 						</ul>
 					</li>
-	            	<li ng-cloak>
-	            		<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
-	            		<img class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
-	            		<img class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
+	            	<li>
+	            		<img class="profileImg ng-hide" ng-show="authData.google">
+	            		<img class="profileImg ng-hide" ng-show="authData.twitter">
+	            		<img class="profileImg ng-hide" ng-show="authData.facebook">
 	            	</li>
 	            </ul>
 	        </div>
 	    </div>
 	</nav>
-	<div id="wrapper" ng-view></div>
-	<div class="modal fade" id="practiceModal" ng-show="practiceForm">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				</form><div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Submit A Practice</h4>
-				</div>
-				<div class="modal-body">
-					
-				</div>
-			</div>
-		</div>
-	</div>
+	<!-- ngView:  --><div id="wrapper" ng-view></div>
 	<div class="modal fade" id="loginModal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				</form><div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 					<h4 class="modal-title">Sign In</h4>
 				</div>
 				<div class="modal-body">
@@ -81,5 +60,5 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="app/app.module.js"></script>
 	<script src="app/app.ctrls.js"></script>
-</body>
-</html>
+
+</body></html>
