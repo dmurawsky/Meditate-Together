@@ -52,7 +52,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		controller: 'HomeCtrl'
 	});
 }).controller("AppCtrl", ["$location", "$rootScope", "HYS", "$firebaseAuth", "Auth", function($location, $rootScope, HYS, $firebaseAuth, Auth){
-	$rootScope.practiceForm = $location.path() === '/practice-list';
 	var ctrl = this;
 	$rootScope.auth = Auth;
     Auth.$onAuth(function(authData) {
@@ -78,7 +77,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
     });
 }])
 .factory("HYS", ['$firebaseObject', '$location', '$rootScope', function ($firebaseObject, $location, $rootScope){
-	var fburl = 'https://tds.firebaseio.com/forms';
+	var fburl = 'https://tds.firebaseio.com/';
 	var ref = new Firebase(fburl);
 	return {
 		url: fburl
