@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title ng-bind="title +' - 70k'"> - 70k</title>
+	<title>{{title}} - HYS</title>
 </head>
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -45,7 +45,7 @@
 					<h4 class="modal-title">Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i> Sign In with Google</a><br><br>
+					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</a><br><br>
 					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
 					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
 				</div>
