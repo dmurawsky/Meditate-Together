@@ -51,7 +51,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		templateUrl: 'app/components/home.html',
 		controller: 'HomeCtrl'
 	});
-}).controller("AppCtrl", ["$location", "$rootScope", "Soil", "$firebaseAuth", "Auth", function($location, $rootScope, Soil, $firebaseAuth, Auth){
+}).controller("AppCtrl", ["$location", "$rootScope", "HYS", "$firebaseAuth", "Auth", function($location, $rootScope, HYS, $firebaseAuth, Auth){
 	$rootScope.practiceForm = $location.path() === '/practice-list';
 	var ctrl = this;
 	$rootScope.auth = Auth;
@@ -64,18 +64,23 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			var date = Math.round(Date.now() / 1000);
 			date.substring;
 			var dateID = date.toString();
-			if(authData.google){
-				Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
-			}else if(authData.twitter){
-				Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.twitter.displayName, pId:authData.uid});
-			}else if(authData.facebook){
-				Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.facebook.displayName, pId:authData.uid});
-			}
+			// if(authData.google){
+			// 	Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
+			// }else if(authData.twitter){
+			// 	Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.twitter.displayName, pId:authData.uid});
+			// }else if(authData.facebook){
+			// 	Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.facebook.displayName, pId:authData.uid});
+			// }
     	}else{
     		$location.path("/");
     		$rootScope.authData = false;
     	}
     });
+}])
+.factory("HYS", ['$firebaseObject', '$location', '$rootScope', function ($firebaseObject, $location, $rootScope){
+	var fburl = 'https://tds.firebaseio.com/forms';
+	var ref = new Firebase(fburl);
+	return {
+		url: fburl
+	}
 }]);
-//so when 70k boots up you'll be presented with a very quick description and large photos of what we're about and the three sign in buttons. 
-//Then when you sign in the screen wont change but you'll have access to the homepage
