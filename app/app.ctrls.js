@@ -1,10 +1,12 @@
-app.controller("HamsasCtrl", ['HYS', function(Soil){
+app.controller("HamsasCtrl", ['HYS', function(HYS){
 }])
-.controller("HamsaCtrl", ['HYS', function(Soil){
+.controller("HamsaCtrl", ['HYS', function(HYS){
 }])
-.controller("MeditationsCtrl", ['HYS', function(Soil){
+.controller("MeditationsCtrl", ['HYS', function(HYS){
 }])
-.controller("GroupsCtrl", ['HYS', function(Soil){
+.controller("GroupsCtrl", ['HYS', function(HYS){
 }])
-.controller("HomeCtrl", ["HYS", function(Soil){
+.controller("GroupCtrl", ['HYS', function(HYS){
+}])
+.controller("HomeCtrl", ["HYS", function(HYS){
 }]);
