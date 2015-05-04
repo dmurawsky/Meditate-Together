@@ -9,52 +9,36 @@
 </head>
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<button id="medBtn" type="button" class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon-fire"></i></button>
-	<nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-	            </button>
-			</div>
-	        <div class="collapse navbar-collapse navbar-menubuilder">
-	            <ul class="nav navbar-nav">
-	                <li><a href="#/meditations">Who's Meditating</a></li>
-          			<li><a class="navbar-brand" href="#/">Community Humanity</a></li>
-	                <li><a href="#/groups">Group Meditations</a></li>
-	            </ul>
-	            <ul class="nav navbar-nav navbar-right">
-	            	<li ng-hide="authData"><button type="button" class="btn btn-xs btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
-	            	<li class="dropdown ng-hide" ng-show="authData">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
-						</ul>
-					</li>
-	            	<li>
-	            		<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
-	            		<img class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
-	            		<img class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
-	            	</li>
-	            </ul>
-	        </div>
-	    </div>
-	</nav>
-	<div class="col-md-1"></div>
-	<div class="col-md-2">
-
-	</div>
-	<div class="col-md-1"></div>
-	<div class="col-md-4" ng-view></div>
-	<div class="modal fade" id="loginModal">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-					<h4 class="modal-title">Sign In</h4>
+	<div class="wrapper">
+		<div class="box">
+			<div class="row">
+				<div class="column col-sm-3" id="sidebar">
+					<a class="logo" href="#"><img src="assets/img/favicon.png" /></a>
+					<ul class="nav">
+						<li ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
+						<li ng-show="authData"><a href="#/groups">Group Meditations</a></li>
+						<li ng-hide="authData">
+							<a style="width:100%;" href="#" class="btn btn-lg btn-danger" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</a><br><br>
+							<a style="width:100%;" href="#" class="btn btn-lg btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
+							<a style="width:100%;" href="#" class="btn btn-lg btn-primary " ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
+						</li>
+						<li ng-show="authData">
+							<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
+							<img class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
+							<img class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
+						</li>
+						<li ng-show="authData"><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
+					</ul>
+					<ul class="nav hidden-xs" id="sidebar-footer">
+						<li>
+							<a href="http://www.bootply.com"><h3>Community Humanity</h3>Made with <i class="glyphicon glyphicon-heart-empty"></i> in Service of Humanity</a>
+						</li>
+					</ul>
 				</div>
-				<div class="modal-body">
-					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</a><br><br>
-					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
-					<a style="width:100%;" href="#" class="btn btn-lg btn-default" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
+				<div class="column col-sm-9" id="main">
+					<div class="padding">
+						<div class="full col-sm-9" ng-view></div>
+					</div>
 				</div>
 			</div>
 		</div>
