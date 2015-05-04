@@ -8,19 +8,15 @@
 	<title>Community Humanity</title>
 </head>
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
-	<button id="medBtn" type="button" class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon-fire"></i></button>
 	<div class="wrapper">
 		<div class="box">
 			<div class="row">
 				<div class="column col-sm-3" id="sidebar">
-					<a class="logo" href="#"><img src="assets/img/favicon.png" /></a>
 					<ul class="nav">
-						<li ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
-						<li ng-show="authData"><a href="#/groups">Group Meditations</a></li>
 						<li ng-hide="authData">
-							<a style="width:100%;" href="#" class="btn btn-lg btn-danger" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</a><br><br>
-							<a style="width:100%;" href="#" class="btn btn-lg btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
-							<a style="width:100%;" href="#" class="btn btn-lg btn-primary " ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
+							<a href="#" class="btn btn-lg btn-danger" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</a><br><br>
+							<a href="#" class="btn btn-lg btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
+							<a href="#" class="btn btn-lg btn-primary " ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
 						</li>
 						<li ng-show="authData">
 							<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
@@ -28,10 +24,13 @@
 							<img class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
 						</li>
 						<li ng-show="authData"><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
+						<li ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
+						<li ng-show="authData"><a href="#/groups">Group Meditations</a></li>
 					</ul>
 					<ul class="nav hidden-xs" id="sidebar-footer">
 						<li>
-							<a href="http://www.bootply.com"><h3>Community Humanity</h3>Made with <i class="glyphicon glyphicon-heart-empty"></i> in Service of Humanity</a>
+							<a class="logo" href="#"><img src="assets/img/favicon.png" /></a>
+							<a href="http://www.siddhanath.org/" target="_blank"><h3>Community Humanity</h3>Made with <i class="glyphicon glyphicon-heart-empty"></i> in Service of Humanity</a>
 						</li>
 					</ul>
 				</div>
