@@ -138,3 +138,6 @@ h1,h2,h3 {
 small.text-muted {
   font-family:courier,courier-new,monospace;
 }
+.row{
+  margin:0;
+}
