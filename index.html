@@ -14,9 +14,9 @@
 				<div class="column col-sm-3" id="sidebar">
 					<ul class="nav">
 						<li ng-hide="authData">
-							<a href="#" class="btn btn-lg btn-danger" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</a><br><br>
-							<a href="#" class="btn btn-lg btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</a><br><br>
-							<a href="#" class="btn btn-lg btn-primary " ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</a>
+							<button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</button><br><br>
+							<button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button><br><br>
+							<button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button>
 						</li>
 						<li ng-show="authData">
 							<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
