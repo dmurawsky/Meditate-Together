@@ -39,7 +39,7 @@ html, body {
 a {
   color:#222222;
 }
-.wrapper, .row {
+.wrapper{
    height: 100%;
    margin-left:0;
    margin-right:0;
