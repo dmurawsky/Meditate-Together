@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" ng-app="app" class="ng-scope">
 <head>
 	<link rel="icon" type="image/png" href="assets/img/favicon.png" />
@@ -27,12 +28,12 @@
 						<li ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
 						<li ng-show="authData"><a href="#/groups">Group Meditations</a></li>
 					</ul>
-					<form class="navbar-left" role="search">
+					<form ng-show="authData" class="navbar-left" role="search">
 						<div class="form-group">
 							<textarea class="form-control" placeholder="Leave a comment"></textarea>
 							<input type="number" class="form-control" placeholder="Estimated duration" />
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-success">Meditate</button>
 					</form>
 					<ul class="nav hidden-xs" id="sidebar-footer">
 						<li>
@@ -57,4 +58,5 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="app/app.module.js"></script>
 	<script src="app/app.ctrls.js"></script>
-</body></html>
+</body>
+</html>
