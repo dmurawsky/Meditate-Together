@@ -54,22 +54,28 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }).controller("AppCtrl", ["$location", "$rootScope", "HYS", "$firebaseAuth", "Auth", function($location, $rootScope, HYS, $firebaseAuth, Auth){
 	var ctrl = this;
 	$rootScope.auth = Auth;
+	var ref = new Firebase(HYS.url);
+	this.setMed = function(){
+		var time = Date.now();
+		ref.child("users/"+authData.uid+"/meditation/").set({"comment":ctrl.comment,"duration":ctrl.duration,"time":time});
+		ref.child("meditations").push({"comment":ctrl.comment,"duration":ctrl.duration,"user":authData.uid,"time":time});
+	}
     Auth.$onAuth(function(authData) {
     	if(authData){
-    		$('#loginModal').modal('hide');
     		console.log(authData);
     		$location.path("/");
 			$rootScope.authData = authData;
-			var date = Math.round(Date.now() / 1000);
-			date.substring;
-			var dateID = date.toString();
-			// if(authData.google){
-			// 	Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.google.displayName, pId:authData.uid});
-			// }else if(authData.twitter){
-			// 	Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.twitter.displayName, pId:authData.uid});
-			// }else if(authData.facebook){
-			// 	Soil.put({cForm:'activity', cData:date, cId:dateID, pForm:'users', pData:authData.facebook.displayName, pId:authData.uid});
-			// }
+			switch(authData.provider) {
+				case "google":
+					ref.child("users/"+authData.uid).set({"name":authData.google.displayName,"link":authData.google.cachedUserProfile.link});
+					break;
+				case "facebook":
+					ref.child("users/"+authData.uid).set({"name":authData.facebook.displayName,"link":authData.facebook.cachedUserProfile.link});
+					break;
+				case "twitter":
+					ref.child("users/"+authData.uid).set({"name":authData.twitter.displayName,"link":"https://twitter.com/"+authData.twitter.username});
+					break;
+			}
     	}else{
     		$location.path("/");
     		$rootScope.authData = false;
@@ -80,6 +86,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	var fburl = 'https://tds.firebaseio.com/';
 	var ref = new Firebase(fburl);
 	return {
-		url: fburl
+		url: fburl;
 	}
 }]);

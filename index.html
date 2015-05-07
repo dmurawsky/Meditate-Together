@@ -29,10 +29,10 @@
 					</ul>
 					<form ng-show="authData" class="navbar-left" role="search">
 						<div class="form-group">
-							<textarea class="form-control" placeholder="Leave a comment"></textarea>
-							<input type="number" class="form-control" placeholder="Estimated duration" />
+							<textarea class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
+							<input type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" />
 						</div>
-						<button type="submit" class="btn btn-success">Meditate</button>
+						<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
 					</form>
 					<ul class="nav hidden-xs" id="sidebar-footer">
 						<li>
