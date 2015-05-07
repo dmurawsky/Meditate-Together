@@ -87,6 +87,6 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	var fburl = 'https://tds.firebaseio.com/';
 	var ref = new Firebase(fburl);
 	return {
-		url: fburl;
+		url: fburl
 	}
 }]);
