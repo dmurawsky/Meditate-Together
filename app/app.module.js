@@ -54,12 +54,13 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 }).controller("AppCtrl", ["$location", "$rootScope", "HYS", "$firebaseAuth", "Auth", function($location, $rootScope, HYS, $firebaseAuth, Auth){
 	var ctrl = this;
 	$rootScope.auth = Auth;
+	console.log(HYS.url);
 	var ref = new Firebase(HYS.url);
 	this.setMed = function(){
 		var time = Date.now();
 		ref.child("users/"+authData.uid+"/meditation/").set({"comment":ctrl.comment,"duration":ctrl.duration,"time":time});
 		ref.child("meditations").push({"comment":ctrl.comment,"duration":ctrl.duration,"user":authData.uid,"time":time});
-	}
+	};
     Auth.$onAuth(function(authData) {
     	if(authData){
     		console.log(authData);
