@@ -14,23 +14,23 @@
 				<div class="column col-sm-3" id="sidebar">
 					<ul class="nav" style="margin-top:30px;">
 						<li ng-hide="authData">
-							<button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')"><i class="fa fa-google fa-lg"></i>  Sign In with Google</button><br><br>
-							<button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')"><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button><br><br>
-							<button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button>
+							<button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button><br><br>
+							<button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button><br><br>
+							<button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button>
 						</li>
 						<li ng-show="authData">
-							<img class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
-							<img class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
-							<img class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
+							<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}">
+							<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
+							<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
 						</li>
-						<li ng-show="authData"><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
-						<li ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
-						<li ng-show="authData"><a href="#/groups">Group Meditations</a></li>
+						<li ng-cloak ng-show="authData"><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
+						<li ng-cloak ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
+						<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>
 					</ul>
-					<form ng-show="authData" class="navbar-left" role="search">
+					<form ng-cloak ng-show="authData" class="navbar-left" role="search">
 						<div class="form-group">
-							<textarea class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
-							<input type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" />
+							<textarea ng-cloak class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
+							<input ng-cloak type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" />
 						</div>
 						<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
 					</form>
