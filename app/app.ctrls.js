@@ -2,7 +2,7 @@ app.controller("HamsasCtrl", ['HYS', function(HYS){
 }])
 .controller("HamsaCtrl", ['HYS', function(HYS){
 }])
-.controller("MeditationsCtrl", ['HYS', '$scope', function(HYS, $scope){
+.controller("MeditationsCtrl", ['HYS', '$scope', '$firebaseObject', function(HYS, $scope, $firebaseObject){
 	var ref = new Firebase(HYS.url+"/meditations");
 	$scope.meditations = $firebaseObject(ref);
 }])
