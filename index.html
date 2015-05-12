@@ -23,14 +23,16 @@
 							<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}">
 							<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}">
 						</li>
-						<li ng-cloak ng-show="authData"><a ng-click="auth.$unauth()" href="">Sign Out</a></li>
+						<li ng-cloak ng-show="authData"><h4>Welcome {{displayName}}!</h4></li>
+						<li ng-cloak ng-show="authData"><small><a ng-click="auth.$unauth()" href="">Sign Out</a></small></li>
 						<li ng-cloak ng-show="authData"><a href="#/meditations">Who's Meditating</a></li>
-						<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>
+						<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
 					</ul>
-					<form ng-cloak ng-show="authData" class="navbar-left" role="search">
+					<form ng-cloak ng-show="authData" class="navbar-left">
 						<div class="form-group">
+							<input ng-cloak type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" /><br><br>
+							<input ng-cloak type="text" class="form-control" ng-model="appCtrl.location" placeholder="Where are you?" /><br><br>
 							<textarea ng-cloak class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
-							<input ng-cloak type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" />
 						</div>
 						<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
 					</form>
