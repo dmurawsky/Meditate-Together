@@ -23,8 +23,8 @@
 							<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
 							<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
 						</li>
-						<li ng-cloak ng-show="authData"><small><a ng-click="auth.$unauth()" href="">Sign Out</a></small></li>
-						<li ng-cloak ng-show="authData"><a href="#/meditations"><h2>Who's Meditating</h2></a></li>
+						<button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-sm" ng-click="auth.$unauth()">Sign Out</button>
+						<button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button>
 						<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
 					</ul>
 					<form ng-cloak ng-show="authData" class="navbar-left">
@@ -37,7 +37,7 @@
 					</form>
 					<ul class="nav hidden-xs" id="sidebar-footer">
 						<li>
-							<a class="logo" href="#"><img src="assets/img/favicon.png" /></a>
+							<!--<a class="logo" href="#"><img src="assets/img/favicon.png" /></a>-->
 							<a href="http://www.siddhanath.org/" target="_blank"><h3>Community Humanity</h3>Made with <i class="glyphicon glyphicon-heart-empty"></i> in Service of Humanity</a>
 						</li>
 					</ul>
