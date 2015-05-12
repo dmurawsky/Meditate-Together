@@ -80,15 +80,12 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 			$rootScope.authData = authData;
 			switch(authData.provider) {
 				case "google":
-					$rootScope.displayName = authData.google.displayName;
 					ref.child("users/"+authData.uid).update({"user":authData.uid,"name":authData.google.displayName,"link":authData.google.cachedUserProfile.link,"photo":authData.google.cachedUserProfile.picture});
 					break;
 				case "facebook":
-					$rootScope.displayName = authData.facebook.displayName;
 					ref.child("users/"+authData.uid).update({"user":authData.uid,"name":authData.facebook.displayName,"link":authData.facebook.cachedUserProfile.link,"photo":authData.facebook.cachedUserProfile.picture.data.url});
 					break;
 				case "twitter":
-					$rootScope.displayName = authData.twitter.displayName;
 					ref.child("users/"+authData.uid).update({"user":authData.uid,"name":authData.twitter.displayName,"link":"https://twitter.com/"+authData.twitter.username,"photo":authData.twitter.cachedUserProfile.profile_image_url_https});
 					break;
 			}
