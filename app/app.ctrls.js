@@ -7,12 +7,7 @@ app.controller("HamsasCtrl", ['HYS', function(HYS){
 	var ref = new Firebase(HYS.url);
 	var obj = $firebaseObject(ref.child("meditations"));
 	obj.$loaded().then(function() {
-		console.log("loaded record:", obj.$id, obj.someOtherKeyInData);
 		$scope.meditations = obj;
-		angular.forEach(obj, function(value, key) {
-
-			console.log(key, value);
-		});
 	});
 }])
 .controller("GroupsCtrl", ['HYS', function(HYS){
