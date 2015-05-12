@@ -141,3 +141,6 @@ small.text-muted {
 .row{
   margin:0;
 }
+#profileImg h4{
+  display:inline;
+}

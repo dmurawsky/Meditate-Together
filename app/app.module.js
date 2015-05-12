@@ -76,7 +76,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
     Auth.$onAuth(function(authData) {
     	if(authData){
     		console.log(authData);
-    		$location.path("/");
+    		$location.path("/meditations");
 			$rootScope.authData = authData;
 			switch(authData.provider) {
 				case "google":
