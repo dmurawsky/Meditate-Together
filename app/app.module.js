@@ -15,7 +15,7 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 	});
 }])
 .factory("Auth", ["$firebaseAuth", function($firebaseAuth){
-	var ref = new Firebase("https://70k.firebaseio.com/");
+	var ref = new Firebase("https://tds.firebaseio.com/");
 	return $firebaseAuth(ref);
 }])
 .config(function($routeProvider){
