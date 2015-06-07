@@ -24,12 +24,18 @@
 				<li><button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button></li>
 				<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
 			</ul>
+				<div class="form-group">
+				</div>
+			</form>
 			<form ng-cloak ng-show="authData" class="form-inline" role="form">
 				<div class="form-group">
-					<input type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" /><br>
-					<input type="text" class="form-control" ng-model="appCtrl.location" placeholder="Where are you?" /><br>
-					<textarea ng-cloak class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
+					<label for="email">Duration</label>
+					<input type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" />
 				</div>
+				<div class="form-group">
+					<label for="location">Location</label>
+					<input id="location" type="text" class="form-control" ng-model="appCtrl.location" placeholder="Where are you?" />
+				</div>S
 				<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
 			</form>
 		</header>
