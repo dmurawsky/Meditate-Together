@@ -15,17 +15,16 @@
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">WebSiteName</a>
 					<ul class="nav navbar-nav" ng-cloak ng-hide="authData">
-						<li><button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button></li>
-						<li><button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button></li>
-						<li><button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button></li>
+						<li><button type="button" class="btn btn-danger navbar-btn" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button></li>
+						<li><button type="button" class="btn btn-warning navbar-btn" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button></li>
+						<li><button type="button" class="btn btn-primary navbar-btn" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button></li>
 						<li id="profileImg" ng-cloak ng-show="authData">
-							<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"><h4 ng-show="authData.google">Welcome {{authData.google.displayName}}!</h4>
-							<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
-							<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
+							<a href><img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"></a>
+							<a href><img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"></a>
+							<a href><img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"></a>
 						</li>
-						<li><button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button></li>
-						<li><button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button></li>
-						<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
+						<li><button type="button" ng-show="authData" class="btn btn-default btn-xs navbar-btn" ng-click="auth.$unauth()">Sign Out</button></li>
+						<li><button type="button" ng-show="authData" class="btn btn-primary btn-lg navbar-btn" href="#/meditations">Who's Meditating?</button></li>
 					</ul>
 				</div>
 				<form ng-cloak ng-show="authData" class="navbar-form navbar-right" role="form">
