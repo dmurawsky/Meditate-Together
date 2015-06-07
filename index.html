@@ -10,45 +10,37 @@
 </head>
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<div class="wrapper">
-		<div class="box">
-				<div class="column col-sm-3" id="sidebar">
-					<ul class="nav" style="margin-top:30px;">
-						<li ng-hide="authData">
-							<button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button><br><br>
-							<button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button><br><br>
-							<button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button>
-						</li>
-						<li id="profileImg" ng-show="authData">
-							<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"><h4 ng-show="authData.google">Welcome {{authData.google.displayName}}!</h4>
-							<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
-							<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
-						</li>
-						<button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button>
-						<button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button><br><br>
-						<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
-					</ul>
-					<form ng-cloak ng-show="authData" class="navbar-left">
-						<h4>Meditate Now!</h4><hr>
-						<div class="form-group">
-							<input ng-cloak type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" /><br>
-							<input ng-cloak type="text" class="form-control" ng-model="appCtrl.location" placeholder="Where are you?" /><br>
-							<textarea ng-cloak class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
-						</div>
-						<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
-					</form>
-					<ul class="nav hidden-xs" id="sidebar-footer">
-						<li>
-							<!--<a class="logo" href="#"><img src="assets/img/favicon.png" /></a>-->
-							<a href="http://www.siddhanath.org/" target="_blank"><h3>Community Humanity</h3>Made with <i class="glyphicon glyphicon-heart-empty"></i> in Service of Humanity</a>
-						</li>
-					</ul>
+		<header>
+			<ul class="nav" style="margin-top:30px;">
+				<li ng-cloak ng-hide="authData">
+					<button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button><br><br>
+					<button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button><br><br>
+					<button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button>
+				</li>
+				<li id="profileImg" ng-cloak ng-show="authData">
+					<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"><h4 ng-show="authData.google">Welcome {{authData.google.displayName}}!</h4>
+					<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
+					<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
+				</li>
+				<button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button>
+				<button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button><br><br>
+				<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
+			</ul>
+			<form ng-cloak ng-show="authData" class="form-inline" role="form">
+				<div class="form-group">
+					<input type="number" class="form-control" ng-model="appCtrl.duration" placeholder="Estimated duration" /><br>
+					<input type="text" class="form-control" ng-model="appCtrl.location" placeholder="Where are you?" /><br>
+					<textarea ng-cloak class="form-control" placeholder="Leave a comment" ng-model="appCtrl.comment"></textarea>
 				</div>
-				<div class="column col-sm-9" id="main">
-					<div class="padding">
-						<div class="full col-sm-9" ng-view></div>
-					</div>
-				</div>
+				<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
+			</form>
+		</header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" id="main" ng-view></div>
+			</div>
 		</div>
+		<footer></footer>
 	</div>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
