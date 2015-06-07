@@ -63,13 +63,13 @@ var app = angular.module('app', ['firebase', 'ngRoute'])
 		ref.child("users/"+authData.uid+"/meditation/").set({"comment":ctrl.comment,"duration":ctrl.duration,"time":time,"length":length,"ends":ends});
 		switch(authData.provider) {
 				case "google":
-					ref.child("meditations").push({"location":ctrl.location,"comment":ctrl.comment,"duration":ctrl.duration,"user":authData.uid,"time":time,"length":length,"ends":ends,"name":authData.google.displayName,"link":authData.google.cachedUserProfile.link,"photo":authData.google.cachedUserProfile.picture});
+					ref.child("meditations").push({"location":ctrl.location,"duration":ctrl.duration,"user":authData.uid,"time":time,"length":length,"ends":ends,"name":authData.google.displayName,"link":authData.google.cachedUserProfile.link,"photo":authData.google.cachedUserProfile.picture});
 					break;
 				case "facebook":
-					ref.child("meditations").push({"location":ctrl.location,"comment":ctrl.comment,"duration":ctrl.duration,"user":authData.uid,"time":time,"length":length,"ends":ends,"name":authData.facebook.displayName,"link":authData.facebook.cachedUserProfile.link,"photo":authData.facebook.cachedUserProfile.picture.data.url});
+					ref.child("meditations").push({"location":ctrl.location,"duration":ctrl.duration,"user":authData.uid,"time":time,"length":length,"ends":ends,"name":authData.facebook.displayName,"link":authData.facebook.cachedUserProfile.link,"photo":authData.facebook.cachedUserProfile.picture.data.url});
 					break;
 				case "twitter":
-					ref.child("meditations").push({"location":ctrl.location,"comment":ctrl.comment,"duration":ctrl.duration,"user":authData.uid,"time":time,"length":length,"ends":ends,"name":authData.twitter.displayName,"link":"https://twitter.com/"+authData.twitter.username,"photo":authData.twitter.cachedUserProfile.profile_image_url_https});
+					ref.child("meditations").push({"location":ctrl.location,"duration":ctrl.duration,"user":authData.uid,"time":time,"length":length,"ends":ends,"name":authData.twitter.displayName,"link":"https://twitter.com/"+authData.twitter.username,"photo":authData.twitter.cachedUserProfile.profile_image_url_https});
 					break;
 			}
 	};
