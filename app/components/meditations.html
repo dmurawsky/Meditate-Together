@@ -1,15 +1,14 @@
-<h1>Who's Meditating</h1>
-<div class="row" ng-repeat="med in meditations | unique:'med.user'">    
-	<div class="col-sm-10">
+<div class="row">
+	<h1>Who's Meditating</h1>
+</div>
+<div class="row" ng-repeat="med in meditations">    
+	<div class="col-md-10">
 		<h3>{{med.name}} is meditating!</h3>
-		<h4><span class="label label-default">{{med.location}}</span></h4><h4>
-		<small class="text-muted">{{med.comment}}</small>
-	</h4>
-</div>
-<div class="col-sm-2">
-	<a href="{{med.link}}" class="pull-right"><img ng-src="{{med.photo}}" class="img-circle"></a>
-</div> 
-<div class="row divider">    
-	<div class="col-sm-12"><hr></div>
-</div>
+		<h4><span class="label label-default">{{med.location}}</span></h4>
+		<h4><small class="text-muted">{{med.comment}}</small></h4>
+	</div>
+	<div class="col-md-2">
+		<a href="{{med.link}}" class="pull-right"><img ng-src="{{med.photo}}" class="img-circle"></a>
+	</div> 
+	<hr>
 </div>
