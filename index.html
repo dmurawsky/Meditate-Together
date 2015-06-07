@@ -11,19 +11,17 @@
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<div class="wrapper">
 		<header>
-			<ul class="nav" style="margin-top:30px;">
-				<li ng-cloak ng-hide="authData">
-					<button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button><br><br>
-					<button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button><br><br>
-					<button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button>
-				</li>
+			<ul class="nav navbar-nav" ng-cloak ng-hide="authData">
+				<li><button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button></li>
+				<li><button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button></li>
+				<li><button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button></li>
 				<li id="profileImg" ng-cloak ng-show="authData">
 					<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"><h4 ng-show="authData.google">Welcome {{authData.google.displayName}}!</h4>
 					<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
 					<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
 				</li>
-				<button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button>
-				<button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button><br><br>
+				<li><button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button></li>
+				<li><button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button></li>
 				<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
 			</ul>
 			<form ng-cloak ng-show="authData" class="form-inline" role="form">
