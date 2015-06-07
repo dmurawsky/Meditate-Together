@@ -10,12 +10,10 @@
 </head>
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<div class="wrapper">
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">WebSiteName</a>
-				</div>
-				<div>
 					<ul class="nav navbar-nav" ng-cloak ng-hide="authData">
 						<li><button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button></li>
 						<li><button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button></li>
