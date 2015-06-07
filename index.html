@@ -10,23 +10,27 @@
 </head>
 <body ng-controller="AppCtrl as appCtrl" class="ng-scope">
 	<div class="wrapper">
-		<header>
-			<ul class="nav navbar-nav" ng-cloak ng-hide="authData">
-				<li><button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button></li>
-				<li><button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button></li>
-				<li><button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button></li>
-				<li id="profileImg" ng-cloak ng-show="authData">
-					<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"><h4 ng-show="authData.google">Welcome {{authData.google.displayName}}!</h4>
-					<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
-					<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
-				</li>
-				<li><button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button></li>
-				<li><button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button></li>
-				<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
-			</ul>
-				<div class="form-group">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">WebSiteName</a>
 				</div>
-			</form>
+				<div>
+					<ul class="nav navbar-nav" ng-cloak ng-hide="authData">
+						<li><button class="btn btn-danger" ng-click="auth.$authWithOAuthPopup('google')" ng-cloak><i class="fa fa-google fa-lg"></i>  Sign In with Google</button></li>
+						<li><button class="btn btn-warning" ng-click="auth.$authWithOAuthPopup('twitter')" ng-cloak><i class="fa fa-twitter fa-lg"></i> Sign In with Twitter</button></li>
+						<li><button class="btn btn-primary" ng-click="auth.$authWithOAuthPopup('facebook')" ng-cloak><i class="fa fa-facebook-official fa-lg"></i> Sign In with Facebook</button></li>
+						<li id="profileImg" ng-cloak ng-show="authData">
+							<img ng-cloak class="profileImg" ng-show="authData.google" ng-src="{{authData.google.cachedUserProfile.picture}}"><h4 ng-show="authData.google">Welcome {{authData.google.displayName}}!</h4>
+							<img ng-cloak class="profileImg" ng-show="authData.twitter" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"><h4 ng-show="authData.twitter">Welcome {{authData.twitter.displayName}}!</h4>
+							<img ng-cloak class="profileImg" ng-show="authData.facebook" ng-src="{{authData.facebook.cachedUserProfile.picture.data.url}}"><h4 ng-show="authData.facebook">Welcome {{authData.facebook.displayName}}!</h4>
+						</li>
+						<li><button ng-show="authData" style="position:absolute;top:10px;left;" class="btn btn-default btn-xs" ng-click="auth.$unauth()">Sign Out</button></li>
+						<li><button ng-show="authData" class="btn btn-primary btn-lg" href="#/meditations">Who's Meditating?</button></li>
+						<!--<li ng-cloak ng-show="authData"><a href="#/groups">Group Meditations</a></li>-->
+					</ul>
+				</div>
+			</div>
 			<form ng-cloak ng-show="authData" class="form-inline" role="form">
 				<div class="form-group">
 					<label for="email">Duration</label>
@@ -35,10 +39,10 @@
 				<div class="form-group">
 					<label for="location">Location</label>
 					<input id="location" type="text" class="form-control" ng-model="appCtrl.location" placeholder="Where are you?" />
-				</div>S
+				</div>
 				<button type="submit" class="btn btn-success" ng-click="appCtrl.setMed()">Meditate</button>
 			</form>
-		</header>
+		</nav>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12" id="main" ng-view></div>
