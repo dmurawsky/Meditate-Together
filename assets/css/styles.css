@@ -1,66 +1,225 @@
-body{
-  font-family:'Open Sans',arial,sans-serif;
-  font-weight: 300;
-
-}
-.profileImg{
-  background-repeat: no-repeat;
-  background-position: 50%;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  margin:15px;
-}
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-.btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
-}
-.btn-circle.btn-xl {
-  width: 70px;
-  height: 70px;
-  padding: 10px 16px;
-  font-size: 24px;
-  line-height: 1.33;
-  border-radius: 35px;
-}
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700');
 html, body {
    height: 100%;
    font-family:'Open Sans',arial,sans-serif;
 }
-#main {
+body{
+  font-family:'Open Sans',arial,sans-serif;
+  font-weight: 300;
+  /*background-image:url(gold.jpg);*/
+  background-size: cover;
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-#main .img-circle {
-  margin-top:18px;
-  height:70px;
-  width:70px;
+a:link, a:hover, a:active, a:visited{text-decoration: none;}
+.level{
+  min-height: 140px;
+}
+.header{
+  text-align: center;
+}
+.bg-0{
+  background:rgb(24,24,24);
+  color:white;
+}
+.bg-1{
+  background:rgb(48,48,48);
+  color:white;
+}
+.bg-3:hover > #addPresets{
+  color: white;
+}
+.bg-3:hover{
+  background:#A8F5F5!important;
+}
+.bg-2{
+  background:rgb(0,205,205);
+}
+.bg-3{
+  background:#7FE5E5;
+}
+#meditating span{
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  color:#7FE5E5;
+  font-size: 40px;
+  margin:0px;
+}
+.userImg img{
+  width: 100%;
+  height:100%;
+}
+.userImg .time span{
+  position: absolute;
+  top: 58px;
+  left: 45px;
+  font-size: 46px;
+  font-weight: 700;
+  color: rgba(48,48,48,0.8);
+}
+.userImg .time{
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background: rgba(255,255,255,0.5); 
+}
+.userImg:hover .time{
+  display: none;
+}
+.userImg{
+  display:block;
+  position:absolute;
+  top: 30px;
+  left: 30px;
+  bottom: 30px;
+  right: 30px;
+}
+#profileImg{
+  width: 100px;
+  margin:10px auto;
+}
+.profileImg{
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin:25px 0 10px;
 }
 h1,h2,h3 {
    font-weight:300;
    font-family:'Open Sans',arial,sans-serif;
 }
-.col-sm-9.full {
-    width: 100%;
-}
 small.text-muted {
   font-family:courier,courier-new,monospace;
 }
-#profileImg h4{
+#meditating{
+  text-align: center;
+  cursor: pointer;
+}
+.redAtag:hover{
+  color:#666;
+}
+.redAtag{
+  color:#888;
+  font-size: 10px;
+  margin-bottom: 20px;
+  display:block;
+  text-transform: uppercase;
+}
+#meditating a{
+  font-weight: 600;
+  color:#a00;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+#login{
+  text-align: center;
+}
+#appInfo .container{
+  position:relative;
+}
+#settings{
+  position:absolute;
+  top:10px;
+  right:10px;
+  font-size: 30px;
+}
+.grid-item { 
+  position: relative;
+  float:left;
+  margin: 10px;
+}
+.ns-popover-list-theme{
+  padding:10px;
+}
+.ns-popover-list-theme button{
+  width:100px;
+  display:block;
+  margin:5px auto;
+  font-size: 20px;
+}
+.preset{
+  position:relative;
+}
+.preset-btn .timeDisplay{
+  position: absolute;
+  top: 59px;
+  left: 48px;
+  width: 40%;
+  font-size: 36px;
+  font-weight: 600;
+}
+.presetWrapper:hover > a{
   display:inline;
 }
+.preset-btn:hover{
+  background:rgb(60,60,60);
+}
+.preset-btn{
+  width: 165px;
+  height:165px;
+  cursor:pointer;
+  border-radius: 50%;
+  position: relative;
+  margin:25px auto;
+}
+#addPresets{
+  font-size: 96px;
+  top: 34px;
+  left: 40px;
+  color: rgba(255,255,255,0.5);
+}
+.presetWrapper a{
+  display:none;
+  position: absolute;
+  bottom: 0px;
+  color:rgb(48,48,48);
+  cursor:pointer;
+  font-size: 20px;
+}
+.editPreset{
+  left:35px;
+}
+.editPreset:hover{
+  color:rgb(60,60,60);
+}
+.removePreset{
+  right:35px;
+}
+.removePreset:hover{
+  color:rgb(60,60,60);
+}
+#meditationGrid{
+  margin-top: 30px;
+  text-align: center;
+}
+.header h1{
+  font-size: 60px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color:rgb(0,205,205);
+}
+.header button{
+  margin: 30px;
+}
+.timeMenu{
+  float:left;
+  width:50%;
+  text-align: center;
+}
+.grid{
+  position: relative;
+  margin-top:20px;
+}
 @media (max-width: 768px) {
-
+  .editPreset{
+    left:0px;
+  }
+  .removePreset{
+    right:0px;
+  }
 }

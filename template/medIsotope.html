@@ -1,0 +1,28 @@
+<!-- <div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-default" ng-click="filtertope('grid-item');">All</button> 
+        <button class="btn btn-default" ng-click="filtertope('Sarasota');">Sarasota</button>
+    </div>
+</div> -->
+<div class="row grid">
+    <div ng-cloak class="grid-item {{::med.location}}" title="{{::med.name}}" ng-repeat="med in items">
+    	<a href="{{::med.link}}" target="_blank" class="userImg">
+    		<img ng-src="{{::med.photo}}" class="img-circle">
+    		<div class="time"><span>{{med.hr}}:{{med.min}}</span></div>
+    	</a>
+        <p class="sr-only ends">{{med.ends}}</p>
+        <p class="sr-only time">{{med.time}}</p>
+    	<div round-progress
+            max="60"
+            current="med.hand"
+            color="{{med.color}}"
+            bgcolor="{{med.bg}}"
+            radius="120"
+            semi="isSemi"
+            rounded="rounded"
+            clockwise="clockwise"
+            stroke="40"
+            animation="linearEase">
+        </div>
+    </div>
+</div>
